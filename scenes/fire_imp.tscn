@@ -25,7 +25,6 @@ shape = SubResource("CircleShape2D_u2qb2")
 [node name="CastTimer" type="Timer" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="PathfindingTimer" type="Timer" parent="."]
 wait_time = 0.2
