@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://btbk41nxhucgu"]
+
+[ext_resource type="Texture2D" uid="uid://csgtksdac2pdm" path="res://enemy/fire_demon/demon.png" id="1_i2emj"]
+[ext_resource type="Script" path="res://common/Health.gd" id="2_2vx51"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c8hve"]
+radius = 14.0
+
+[node name="fire_demon" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_i2emj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c8hve")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_2vx51")

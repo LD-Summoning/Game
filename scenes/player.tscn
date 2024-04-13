@@ -459,3 +459,5 @@ script = ExtResource("4_o31k1")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 shadow_enabled = true
 texture = ExtResource("5_qrj7x")
+
+[node name="Camera2D" type="Camera2D" parent="."]

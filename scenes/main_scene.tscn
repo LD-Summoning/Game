@@ -10,4 +10,4 @@
 [node name="Player" parent="." instance=ExtResource("2_vo3os")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.427451, 0.427451, 0.427451, 1)
+color = Color(0, 0, 0, 1)

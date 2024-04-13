@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bjo585dmglbid"]
+[gd_scene load_steps=20 format=3 uid="uid://bjo585dmglbid"]
 
 [ext_resource type="Texture2D" uid="uid://bhadeiluftkey" path="res://background/floortiles.png" id="1_70sv2"]
 [ext_resource type="Texture2D" uid="uid://d1sixnwkab6tb" path="res://background/walltiles.png" id="2_bijbt"]
 [ext_resource type="Script" path="res://player/PlayerStartPos.gd" id="3_j0txl"]
 [ext_resource type="PackedScene" uid="uid://b0gwjrkr0mtl4" path="res://scenes/fire_imp.tscn" id="3_po6s7"]
+[ext_resource type="PackedScene" uid="uid://btbk41nxhucgu" path="res://scenes/fire_demon.tscn" id="5_q0bhd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bpko7"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -142,6 +143,9 @@ script = ExtResource("3_j0txl")
 position = Vector2(299, 145)
 
 [node name="Fireballs" type="Node" parent="Enemies"]
+
+[node name="fire_demon" parent="Enemies" instance=ExtResource("5_q0bhd")]
+position = Vector2(142, 207)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")

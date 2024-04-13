@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cehy02ptwnhm7"]
+
+[ext_resource type="Shader" path="res://shader/fire.gdshader" id="1_kcq53"]
+
+[sub_resource type="Gradient" id="Gradient_c5w61"]
+offsets = PackedFloat32Array(0, 0.0900901, 0.0901639, 0.139344, 0.221311, 0.467213, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 0.0588235, 0.0588235, 1, 0.983381, 0.188433, 1.92523e-07, 1, 0.865975, 0.425307, 0.013303, 1, 0.89982, 0.570432, 0.262469, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gj45u"]
+gradient = SubResource("Gradient_c5w61")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qn05m"]
+shader = ExtResource("1_kcq53")
+shader_parameter/scroll = Vector2(0.1, 0.1)
+shader_parameter/scroll2 = Vector2(0.2, 0.2)
+shader_parameter/TONE_MAPPING = SubResource("GradientTexture1D_gj45u")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u71bn"]
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_msf8j"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_u71bn")
+
+[node name="burning_area" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qn05m")
+texture = SubResource("NoiseTexture2D_msf8j")
