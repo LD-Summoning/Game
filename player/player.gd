@@ -16,6 +16,14 @@ func _physics_process(delta):
 func _ready():
 	pass # Replace with function body.
 
+func _on_damage(damage: int):
+	health = health - damage
+	
+func signal_damage(damage: int):
+	_on_damage(damage)
+
+func get_health() -> int:
+	return health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
