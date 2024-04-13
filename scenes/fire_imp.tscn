@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0gwjrkr0mtl4"]
+[gd_scene load_steps=6 format=3 uid="uid://b0gwjrkr0mtl4"]
 
 [ext_resource type="Texture2D" uid="uid://c7ek30hlrsda7" path="res://enemy/fire_imp/imp.png" id="1_o5n45"]
 [ext_resource type="Script" path="res://enemy/fire_imp/fire_imp.gd" id="1_r1ib6"]
 [ext_resource type="Script" path="res://common/Health.gd" id="3_48u3h"]
+[ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="4_sg0ck"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u2qb2"]
 radius = 9.5
@@ -31,6 +32,14 @@ autostart = true
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_48u3h")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.988235, 0.133333, 0, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("4_sg0ck")
+offset = Vector2(5, 0)
+texture_scale = 0.3
 
 [connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]

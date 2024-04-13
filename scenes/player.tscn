@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://bqnmlnjkhs2tk"]
+[gd_scene load_steps=24 format=3 uid="uid://bqnmlnjkhs2tk"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://cslpjqtkl2x1u" path="res://player/Oktopus_idle-Sheet.png" id="2_jfsms"]
 [ext_resource type="Texture2D" uid="uid://bovxy3mk6dy45" path="res://player/Oktopus_left_walk-Sheet.png" id="3_kw36i"]
 [ext_resource type="Script" path="res://common/Health.gd" id="4_o31k1"]
+[ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="5_qrj7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hoi"]
 size = Vector2(16, 15)
@@ -147,3 +148,7 @@ animation = &"left_walk"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_o31k1")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("5_qrj7x")
