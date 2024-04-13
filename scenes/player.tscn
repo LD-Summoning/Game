@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://bqnmlnjkhs2tk"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_pu3yh"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://cslpjqtkl2x1u" path="res://player/Oktopus_idle-Sheet.png" id="2_jfsms"]
 [ext_resource type="Texture2D" uid="uid://bovxy3mk6dy45" path="res://player/Oktopus_left_walk-Sheet.png" id="3_kw36i"]
 
