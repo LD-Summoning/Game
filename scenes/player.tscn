@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://bqnmlnjkhs2tk"]
+[gd_scene load_steps=82 format=3 uid="uid://bqnmlnjkhs2tk"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://mq7b8xjxsghq" path="res://player/Oktopus_Animation.png" id="2_xvn55"]
@@ -566,6 +566,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_4q8am"]
+script/source = "extends Timer
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_pu3yh")
@@ -589,3 +602,13 @@ shadow_enabled = true
 texture = ExtResource("5_qrj7x")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RollTimer" type="Timer" parent="."]
+one_shot = true
+script = SubResource("GDScript_4q8am")
+
+[node name="RollCooldown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
+[connection signal="timeout" from="RollCooldown" to="." method="_on_roll_cooldown_timeout"]

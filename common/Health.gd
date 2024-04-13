@@ -1,7 +1,7 @@
 extends Node
 
 @export var _health = 100
-@export var _invincible = false
+@export var _invincible = 0
 
 
 func _on_damage(damage: int):
@@ -10,7 +10,7 @@ func _on_damage(damage: int):
 
 
 func signal_damage(damage: int):
-	if _invincible:
+	if _invincible > 0:
 		return
 	_on_damage(damage)
 
@@ -18,6 +18,16 @@ func signal_damage(damage: int):
 func get_health() -> int:
 	return _health
 
+
+func add_invinicibility():
+	_invincible += 1
+	
+func revoke_invincibility():
+	assert(_invincible >= 0)
+	if _invincible == 0:
+		return
+	_invincible -= 1
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -20,19 +20,30 @@ enum Direction{
 }
 
 @export var speed = 90
+@export var roll_speed = 200
+@export var roll_time = 0.5
+@export var roll_cooldown = 1
+
 @onready var _animation = $AnimatedSprite2D
 @onready var _health = $Health
+@onready var _roll_timer = $RollTimer
+@onready var _roll_cooldown_timer = $RollCooldown
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
 var roll_direction: Direction
+var roll_direction_vector
+var can_roll = true
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 
 func _physics_process(_delta):
-	get_input()
+	if rolling:
+		velocity = roll_direction_vector * roll_speed
+	else: 
+		get_input()
 	move_and_slide()
 
 # Called when the node enters the scene tree for the first time.
@@ -68,20 +79,26 @@ func get_move_direction() -> Direction:
 		return Direction.LEFT
 			
 
-func _manage_roll():
-	rolling = true
-	_animation.stop()
-	_animation.play(roll_direction_map())
-	OS.delay_msec(1000)
+func _on_roll_timer_timeout():
 	rolling = false
+	_health.revoke_invincibility()
 	_animation.stop()
 	_animation.play(animationStateMap(state))
 
+func _on_roll_cooldown_timeout():
+	can_roll = true
+
 
 func roll():
+	_health.add_invinicibility()
 	roll_direction = get_move_direction()
-	var roll_thread = Thread.new()
-	roll_thread.start(_manage_roll)
+	roll_direction_vector = Input.get_vector("left", "right", "up", "down")
+	rolling = true
+	can_roll = false
+	_animation.stop()
+	_animation.play(roll_direction_map())
+	_roll_timer.start(roll_time)
+	_roll_cooldown_timer.start(roll_cooldown)
 	
 
 func animationStateMap(state: AnimationStates) -> StringName:
@@ -109,7 +126,7 @@ func changeAnimationState(action: StringName):
 func _input(event):
 	if rolling:
 		return
-	elif event.is_action_pressed("roll"):
+	elif event.is_action_pressed("roll") and can_roll:
 		roll()
 		return
 	match state:
