@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0gwjrkr0mtl4"]
+
+[ext_resource type="Texture2D" uid="uid://c7ek30hlrsda7" path="res://enemy/fire_imp/imp.png" id="1_o5n45"]
+[ext_resource type="Script" path="res://enemy/fire_imp/fire_imp.gd" id="1_r1ib6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aif1t"]
+size = Vector2(11, 16)
+
+[node name="FireImp" type="CharacterBody2D"]
+script = ExtResource("1_r1ib6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_o5n45")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_aif1t")
