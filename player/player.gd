@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 enum AnimationStates {
-	MOVING_LEFT,
-	MOVING_RIGHT,
-	MOVING_UP,
-	MOVING_DOWN,
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
 	ROLLING,
 	IDLE
 }
@@ -29,7 +29,24 @@ func _ready():
 func _input(event):
 	match state:
 		AnimationStates.IDLE:
-			pass
+			if event.is_action_pressed("down"):
+				state= AnimationStates.DOWN
+				_animation.stop()
+				_animation.play("down_walk")
+			elif event.is_action_pressed("right"):
+				state = AnimationStates.RIGHT
+				_animation.stop()
+				_animation.play("right_walk")
+			elif event.is_action_pressed("up"):
+				state = AnimationStates.UP
+				_animation.stop()
+				_animation.play("up_walk")
+			elif event.is_action_pressed("left"):
+				state = AnimationStates.LEFT
+				_animation.stop()
+				_animation.play("left_walk")
+			
+			
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

@@ -75,6 +75,11 @@ region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k722i"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"down_walk",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5spka")
@@ -132,6 +137,21 @@ animations = [{
 "loop": true,
 "name": &"left_walk",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"right_walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"rolling",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"up_walk",
+"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -144,7 +164,7 @@ shape = SubResource("RectangleShape2D_07hoi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k722i")
-animation = &"left_walk"
+animation = &"rolling"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_o31k1")
