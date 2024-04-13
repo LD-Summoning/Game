@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var speed = 100
 @onready var player = get_parent().get_node("Player")
 @onready var cast_timer = get_node("CastTimer")
+@onready var fireball_scene = preload("res://scenes/fireball.tscn")
+@onready var fireball_parent = get_parent().get_node("Fireballs")
 
 var can_cast = true
 
@@ -18,9 +20,17 @@ func _physics_process(delta):
 		move_and_collide(direction * speed * delta)
 	elif can_cast:
 		cast_timer.start()
-		# todo: cast
+		cast_fireball()
 		can_cast = false
 
+
+func cast_fireball():
+	var fireball = fireball_scene.instantiate()
+	fireball.position = position
+	var direction = (player.position + player.velocity * 0.5 - position).normalized()
+	
+	fireball.velocity = direction * 300
+	fireball_parent.add_child(fireball)
 
 func _on_cast_timer_timeout():
 	can_cast = true
