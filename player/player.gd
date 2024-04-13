@@ -79,6 +79,7 @@ func get_move_direction() -> Direction:
 		return Direction.LEFT
 			
 
+# !todo: Nach der Rolle muss der AnimationState des Spielers neu gesetzt werden!
 func _on_roll_timer_timeout():
 	rolling = false
 	_health.revoke_invincibility()
@@ -126,7 +127,7 @@ func changeAnimationState(action: StringName):
 func _input(event):
 	if rolling:
 		return
-	elif event.is_action_pressed("roll") and can_roll:
+	elif event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
 		roll()
 		return
 	match state:
