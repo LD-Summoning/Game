@@ -1,7 +1,17 @@
 extends CharacterBody2D
 
+enum AnimationStates {
+	MOVING_LEFT,
+	MOVING_RIGHT,
+	MOVING_UP,
+	MOVING_DOWN,
+	ROLLING,
+	IDLE
+}
+
 @export var speed = 90
 @onready var _animation = $AnimatedSprite2D
+var state: AnimationStates = AnimationStates.IDLE
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -13,13 +23,14 @@ func _physics_process(_delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	_animation.play("idle")
 
+
+func _input(event):
+	match state:
+		AnimationStates.IDLE:
+			pass
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("left"):
-		_animation.stop()
-		_animation.play("left_walk")
-	if Input.is_action_just_released("left"):
-		_animation.stop()
-		_animation.play("idle")
+	pass
