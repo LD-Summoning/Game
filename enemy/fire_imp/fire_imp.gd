@@ -13,7 +13,7 @@ var can_cast = true
 var active = false
 
 # Called when the node enters the scene tree for the first time.
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	velocity = Vector2.ZERO
 	
@@ -21,7 +21,7 @@ func _physics_process(delta):
 		var next_path_pos = agent.get_next_path_position()
 		var direction = global_position.direction_to(next_path_pos)
 		velocity = direction * speed
-	if can_cast:
+	if can_cast && can_see_player():
 		cast_timer.start()
 		cast_fireball()
 		can_cast = false
@@ -39,22 +39,26 @@ func cast_fireball():
 
 func make_path():
 	var player_position = player.position
+	var target_position
 	if can_see_player():
 		
 		var direction_to_player = (player_position - position).normalized()
 		direction_to_player *= 100
-		var target_position = player_position - direction_to_player
-	
-		agent.target_position = target_position
+		target_position = player_position - direction_to_player
+		target_position = target_position
 	else:
-		agent.target_position = player_position
-	active = true
+		target_position = player_position
+		
+	if (target_position - global_position).length_squared() > 16:
+		agent.target_position = target_position
+		active = true
+	else:
+		active = false
 
 
 func can_see_player() -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
-	query.exclude.insert(0, self)
 	var result = space_state.intersect_ray(query)
 	return result && result.collider == player
 
