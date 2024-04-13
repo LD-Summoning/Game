@@ -1,7 +1,81 @@
-[gd_scene format=3 uid="uid://bqnmlnjkhs2tk"]
+[gd_scene load_steps=13 format=3 uid="uid://bqnmlnjkhs2tk"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_pu3yh"]
+[ext_resource type="Texture2D" uid="uid://cslpjqtkl2x1u" path="res://player/Oktopus_idle-Sheet.png" id="2_jfsms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07hoi"]
+size = Vector2(16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5spka"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4bex"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pgau"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ms5dy"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrbab"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kofpw"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxtcr"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rapgm"]
+atlas = ExtResource("2_jfsms")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k722i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5spka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4bex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pgau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ms5dy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrbab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kofpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxtcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rapgm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_pu3yh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_07hoi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k722i")
