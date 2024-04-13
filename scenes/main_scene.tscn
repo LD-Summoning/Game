@@ -8,3 +8,9 @@
 [node name="Level" parent="." instance=ExtResource("1_m0ma4")]
 
 [node name="Player" parent="." instance=ExtResource("2_vo3os")]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/CharacterBody2D"]
