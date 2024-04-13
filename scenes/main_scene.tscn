@@ -8,6 +8,3 @@
 [node name="Level" parent="." instance=ExtResource("1_m0ma4")]
 
 [node name="Player" parent="." instance=ExtResource("2_vo3os")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(640, 360)
