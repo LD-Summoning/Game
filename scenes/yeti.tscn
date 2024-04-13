@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://hpc1asacwnb1"]
+
+[ext_resource type="Texture2D" uid="uid://bryfn1onysuty" path="res://enemy/yeti/yeti_atlas.png" id="1_2x2g5"]
+[ext_resource type="Script" path="res://enemy/yeti/yeti.gd" id="1_das8c"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cby5i"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6n56"]
+size = Vector2(13, 21)
+
+[node name="Yeti" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_das8c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_cby5i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2x2g5")
+hframes = 2
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="TargetArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
+position = Vector2(11.5, 2.5)
+shape = SubResource("RectangleShape2D_k6n56")
+
+[node name="PathfindingTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
