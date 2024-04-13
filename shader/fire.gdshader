@@ -3,10 +3,11 @@ shader_type canvas_item;
 uniform vec2 scroll =vec2(0.5, 0.5);
 uniform vec2 scroll2 = vec2(0.3, 0.3);
 uniform sampler2D TONE_MAPPING;
+uniform float time_offset = 0;
 
 void fragment() {
-	float noise_intensity = texture(TEXTURE, UV+ scroll * TIME).r;
-	float noise_intensity2 = texture(TEXTURE, UV+scroll2 * TIME).r;
+	float noise_intensity = texture(TEXTURE, UV+ scroll * (TIME + time_offset)).r;
+	float noise_intensity2 = texture(TEXTURE, UV+scroll2 * (TIME + time_offset)).r;
 	float intensity = noise_intensity * noise_intensity2;
 	vec2 centered = vec2(0.5, 0.5) - UV;
 	float d = length(centered);

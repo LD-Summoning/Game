@@ -97,3 +97,7 @@ func _on_death():
 
 func _on_death_timer_timeout():
 	queue_free()
+
+
+func _on_health_death():
+	pass # Replace with function body.

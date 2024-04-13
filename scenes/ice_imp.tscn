@@ -1,27 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0gwjrkr0mtl4"]
+[gd_scene load_steps=5 format=3 uid="uid://cr54n4tv8h007"]
 
-[ext_resource type="Script" path="res://enemy/fire_imp/fire_imp.gd" id="1_r1ib6"]
-[ext_resource type="Texture2D" uid="uid://c7ek30hlrsda7" path="res://enemy/fire_imp/fire_imp.png" id="2_sj5pq"]
-[ext_resource type="Script" path="res://common/Health.gd" id="3_48u3h"]
+[ext_resource type="Script" path="res://enemy/ice_imp/ice_imp.gd" id="1_iixbc"]
+[ext_resource type="Texture2D" uid="uid://be64yd08d7fpf" path="res://enemy/ice_imp/ice_imp.png" id="1_iqb73"]
+[ext_resource type="Script" path="res://common/Health.gd" id="2_ep3dq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u2qb2"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_rgpxp"]
 radius = 9.5
 
-[node name="FireImp" type="CharacterBody2D"]
+[node name="IceImp" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
-motion_mode = 1
-wall_min_slide_angle = 0.0
-script = ExtResource("1_r1ib6")
+script = ExtResource("1_iixbc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_sj5pq")
+modulate = Color(0.00392157, 1, 1, 1)
+texture = ExtResource("1_iqb73")
 hframes = 8
 vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 0)
-shape = SubResource("CircleShape2D_u2qb2")
+shape = SubResource("CircleShape2D_rgpxp")
 
 [node name="CastTimer" type="Timer" parent="."]
 
@@ -32,7 +31,7 @@ wait_time = 0.2
 autostart = true
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("3_48u3h")
+script = ExtResource("2_ep3dq")
 
 [node name="AnimationTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -44,6 +43,6 @@ one_shot = true
 
 [connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
-[connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

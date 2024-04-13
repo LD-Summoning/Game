@@ -11,9 +11,11 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 0.0588235, 0.0588235, 1, 0.
 gradient = SubResource("Gradient_c5w61")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qn05m"]
+resource_local_to_scene = true
 shader = ExtResource("1_kcq53")
 shader_parameter/scroll = Vector2(0.1, 0.1)
 shader_parameter/scroll2 = Vector2(0.2, 0.2)
+shader_parameter/time_offset = 0.0
 shader_parameter/TONE_MAPPING = SubResource("GradientTexture1D_gj45u")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_u71bn"]

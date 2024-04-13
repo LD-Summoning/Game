@@ -10,6 +10,7 @@ var t: float = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start_pos = position
+	$Sprite2D.material.set_shader_parameter("time_offset", randf_range(0, 100))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
