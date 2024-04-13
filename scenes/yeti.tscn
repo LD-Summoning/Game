@@ -11,6 +11,8 @@ height = 16.0
 size = Vector2(13, 21)
 
 [node name="Yeti" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_das8c")

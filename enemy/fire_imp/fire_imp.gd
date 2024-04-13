@@ -8,9 +8,18 @@ extends CharacterBody2D
 @onready var fireball_scene = preload("res://scenes/fireball.tscn")
 @onready var fireball_parent = get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D
+@onready var sprite2d = $Sprite2D
 
 var can_cast = true
 var active = false
+
+enum AnimationState {
+	IDLE = 0,
+	MOVING = 8,
+	DYING = 16
+}
+
+var animation_state = AnimationState.IDLE
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(_delta):
@@ -69,3 +78,12 @@ func _on_cast_timer_timeout():
 
 func _on_pathfinding_timer_timeout():
 	make_path()
+
+
+func _on_animation_timer_timeout():
+	var start_frame: int = animation_state
+	sprite2d.frame += 1
+	if sprite2d.frame >= start_frame + 8:
+		sprite2d.frame = start_frame
+	elif sprite2d.frame < start_frame:
+		sprite2d.frame = start_frame

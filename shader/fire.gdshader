@@ -13,6 +13,10 @@ void fragment() {
 	if (d > 0.5) {
 		discard;
 	}
-	COLOR = texture(TONE_MAPPING, vec2(intensity));
+	if (d > 0.48) {
+		COLOR = vec4(vec3(0.), 1.);
+	} else {
+		COLOR = texture(TONE_MAPPING, vec2(intensity));
+	}
 }
 

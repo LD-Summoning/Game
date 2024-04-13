@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = 50
+@export var speed = 125
 @export var damage = 10
 
 @onready var player = get_parent().get_parent().get_parent().get_node("Player")

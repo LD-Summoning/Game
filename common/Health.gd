@@ -3,10 +3,16 @@ extends Node
 @export var _health = 100
 @export var _invincible = 0
 
+signal death
+signal health_changed(from, to)
+
 
 func _on_damage(damage: int):
 	_health = _health - damage
 	print("Took damage: "+str(damage))
+	health_changed.emit(_health + damage, _health)
+	if _health <= 0:
+		death.emit()
 
 
 func signal_damage(damage: int):

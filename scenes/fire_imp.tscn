@@ -16,6 +16,8 @@ script = ExtResource("1_r1ib6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_o5n45")
+hframes = 8
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 0)
@@ -32,5 +34,10 @@ autostart = true
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_48u3h")
 
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
 [connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
