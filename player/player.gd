@@ -31,7 +31,6 @@ enum Direction{
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
-var roll_direction: Direction
 var roll_direction_vector
 var can_roll = true
 
@@ -51,12 +50,13 @@ func _ready():
 	_animation.play("idle")
 
 
-func roll_direction_map() -> StringName:
+func roll_direction_map(roll_direction: Direction) -> StringName:
 	match roll_direction:
 		Direction.UP: return "rolling_up"
 		Direction.DOWN: return "rolling_down"
-		Direction.LEFT | Direction.UP_LEFT | Direction.DOWN_LEFT: return "rolling_left"
-		_: return "rolling_right"
+		Direction.LEFT, Direction.UP_LEFT, Direction.DOWN_LEFT: return "rolling_left"
+		Direction.RIGHT, Direction.DOWN_RIGHT, Direction. UP_RIGHT: return "rolling_right"
+	return "rolling_left"
 
 func get_move_direction() -> Direction:
 	if Input.is_action_pressed("up"):
@@ -85,6 +85,9 @@ func _on_roll_timer_timeout():
 	_health.revoke_invincibility()
 	_animation.stop()
 	_animation.play(animationStateMap(state))
+	set_collision_mask_value(3, true)
+	set_collision_mask_value(4, true)
+	set_collision_layer_value(1, true)
 
 func _on_roll_cooldown_timeout():
 	can_roll = true
@@ -92,14 +95,17 @@ func _on_roll_cooldown_timeout():
 
 func roll():
 	_health.add_invinicibility()
-	roll_direction = get_move_direction()
+	var roll_direction = get_move_direction()
 	roll_direction_vector = Input.get_vector("left", "right", "up", "down")
 	rolling = true
 	can_roll = false
 	_animation.stop()
-	_animation.play(roll_direction_map())
+	_animation.play(roll_direction_map(roll_direction))
 	_roll_timer.start(roll_time)
 	_roll_cooldown_timer.start(roll_cooldown)
+	set_collision_mask_value(3, false)
+	set_collision_mask_value(4, false)
+	set_collision_layer_value(1, false)
 	
 
 func animationStateMap(state: AnimationStates) -> StringName:
