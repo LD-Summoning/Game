@@ -457,6 +457,7 @@ animation = &"right_walk"
 script = ExtResource("4_o31k1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 shadow_enabled = true
 texture = ExtResource("5_qrj7x")
 

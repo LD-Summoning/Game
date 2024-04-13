@@ -10,4 +10,5 @@
 [node name="Player" parent="." instance=ExtResource("2_vo3os")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0, 0, 0, 1)
