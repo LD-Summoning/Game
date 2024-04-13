@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://bjo585dmglbid"]
+[gd_scene load_steps=21 format=3 uid="uid://bjo585dmglbid"]
 
 [ext_resource type="Texture2D" uid="uid://bhadeiluftkey" path="res://background/floortiles.png" id="1_70sv2"]
 [ext_resource type="Texture2D" uid="uid://d1sixnwkab6tb" path="res://background/walltiles.png" id="2_bijbt"]
 [ext_resource type="Script" path="res://player/PlayerStartPos.gd" id="3_j0txl"]
 [ext_resource type="PackedScene" uid="uid://b0gwjrkr0mtl4" path="res://scenes/fire_imp.tscn" id="3_po6s7"]
 [ext_resource type="PackedScene" uid="uid://btbk41nxhucgu" path="res://scenes/fire_demon.tscn" id="5_q0bhd"]
+[ext_resource type="PackedScene" uid="uid://hpc1asacwnb1" path="res://scenes/yeti.tscn" id="6_yagl5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bpko7"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -145,7 +146,10 @@ script = ExtResource("3_j0txl")
 position = Vector2(299, 145)
 
 [node name="fire_demon" parent="Enemies" instance=ExtResource("5_q0bhd")]
-position = Vector2(142, 207)
+position = Vector2(337, 269)
+
+[node name="Yeti" parent="Enemies" instance=ExtResource("6_yagl5")]
+position = Vector2(142, 205)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")
