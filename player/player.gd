@@ -5,13 +5,30 @@ enum AnimationStates {
 	RIGHT,
 	UP,
 	DOWN,
-	ROLLING,
 	IDLE
 }
+
+func animationStateMap(state: AnimationStates) -> StringName:
+	match state:
+		AnimationStates.LEFT: return "left_walk"
+		AnimationStates.RIGHT: return "right_walk"
+		AnimationStates.UP: return "up_walk"
+		AnimationStates.DOWN: return "down_walk"
+		_: return "idle"
+
+func actionStateMap(action: StringName) -> AnimationStates:
+	match action:
+		"left": return AnimationStates.LEFT
+		"right": return AnimationStates.RIGHT
+		"up": return AnimationStates.UP
+		"down": return AnimationStates.DOWN
+		_: return AnimationStates.IDLE
+		
 
 @export var speed = 90
 @onready var _animation = $AnimatedSprite2D
 var state: AnimationStates = AnimationStates.IDLE
+var rolling
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -26,27 +43,83 @@ func _ready():
 	_animation.play("idle")
 
 
+func changeAnimationState(action: StringName):
+	var animation = actionStateMap(action)
+	state = animation
+	_animation.stop()
+	_animation.play(animationStateMap(animation))
+
+
+func roll():
+	pass
+
 func _input(event):
 	match state:
 		AnimationStates.IDLE:
-			if event.is_action_pressed("down"):
-				state= AnimationStates.DOWN
-				_animation.stop()
-				_animation.play("down_walk")
+			if event.is_action_pressed("roll"):
+				roll()
+			elif event.is_action_pressed("down"):
+				changeAnimationState("down")
 			elif event.is_action_pressed("right"):
-				state = AnimationStates.RIGHT
-				_animation.stop()
-				_animation.play("right_walk")
+				changeAnimationState("right")
 			elif event.is_action_pressed("up"):
-				state = AnimationStates.UP
-				_animation.stop()
-				_animation.play("up_walk")
+				changeAnimationState("up")
 			elif event.is_action_pressed("left"):
-				state = AnimationStates.LEFT
-				_animation.stop()
-				_animation.play("left_walk")
-			
-			
+				changeAnimationState("left")
+		AnimationStates.DOWN:
+			if event.is_action_pressed("roll"):
+				roll()
+			elif event.is_action_released("down"):
+				if !Input.is_anything_pressed():
+					changeAnimationState("idle")
+				elif Input.is_action_pressed("right"):
+					changeAnimationState("right")
+				elif Input.is_action_pressed("up"):
+					changeAnimationState("up")
+				elif Input.is_action_pressed("left"):
+					changeAnimationState("left")
+				else:
+					changeAnimationState("idle")
+		AnimationStates.RIGHT:
+			if event.is_action_pressed("roll"):
+				roll()
+			elif event.is_action_pressed("down"):
+				changeAnimationState("down")
+			elif event.is_action_released("right"):
+				if !Input.is_anything_pressed():
+					changeAnimationState("idle")
+				elif Input.is_action_pressed("up"):
+					changeAnimationState("up")
+				elif Input.is_action_pressed("left"):
+					changeAnimationState("left")
+				else:
+					changeAnimationState("idle")
+		AnimationStates.UP:
+			if event.is_action_pressed("roll"):
+				roll()
+			elif event.is_action_pressed("down"):
+				changeAnimationState("down")
+			elif event.is_action_pressed("right"):
+				changeAnimationState("right")
+			elif event.is_action_released("up"):
+				if !Input.is_anything_pressed():
+					changeAnimationState("idle")
+				elif Input.is_action_pressed("left"):
+					changeAnimationState("left")
+				else:
+					changeAnimationState("idle")
+		AnimationStates.LEFT:
+			if event.is_action_pressed("roll"):
+				roll()
+			elif event.is_action("down"):
+				changeAnimationState("down")
+			elif event.is_action_pressed("right"):
+				changeAnimationState("right")
+			elif event.is_action_pressed("up"):
+				changeAnimationState("up")
+			elif event.is_action_released("left"):
+				changeAnimationState("idle")
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

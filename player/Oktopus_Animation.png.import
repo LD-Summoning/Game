@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cslpjqtkl2x1u"
-path="res://.godot/imported/Oktopus_idle-Sheet.png-708c33936ab0797136538fbfb5e9ea38.ctex"
+uid="uid://cb13rfwiy0f7d"
+path="res://.godot/imported/Oktopus_Animation.png-6e628a855c56ddfc45b70c062f0f0834.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/Oktopus_idle-Sheet.png"
-dest_files=["res://.godot/imported/Oktopus_idle-Sheet.png-708c33936ab0797136538fbfb5e9ea38.ctex"]
+source_file="res://player/Oktopus_Animation.png"
+dest_files=["res://.godot/imported/Oktopus_Animation.png-6e628a855c56ddfc45b70c062f0f0834.ctex"]
 
 [params]
 
