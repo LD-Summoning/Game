@@ -6,17 +6,18 @@ extends Node
 
 func _on_damage(damage: int):
 	_health = _health - damage
-	
-	
+	print("Took damage: "+str(damage))
+
+
 func signal_damage(damage: int):
 	if _invincible:
 		return
 	_on_damage(damage)
-	
+
 
 func get_health() -> int:
 	return _health
-	
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

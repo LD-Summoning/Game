@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0gwjrkr0mtl4"]
+[gd_scene load_steps=5 format=3 uid="uid://b0gwjrkr0mtl4"]
 
 [ext_resource type="Texture2D" uid="uid://c7ek30hlrsda7" path="res://enemy/fire_imp/imp.png" id="1_o5n45"]
 [ext_resource type="Script" path="res://enemy/fire_imp/fire_imp.gd" id="1_r1ib6"]
+[ext_resource type="Script" path="res://common/Health.gd" id="3_48u3h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u2qb2"]
 radius = 9.5
 
 [node name="FireImp" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_r1ib6")
@@ -25,6 +28,9 @@ shape = SubResource("CircleShape2D_u2qb2")
 [node name="PathfindingTimer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_48u3h")
 
 [connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
