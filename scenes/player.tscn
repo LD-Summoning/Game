@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqnmlnjkhs2tk"]
+[gd_scene load_steps=22 format=3 uid="uid://bqnmlnjkhs2tk"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://cslpjqtkl2x1u" path="res://player/Oktopus_idle-Sheet.png" id="2_jfsms"]
+[ext_resource type="Texture2D" uid="uid://bovxy3mk6dy45" path="res://player/Oktopus_left_walk-Sheet.png" id="3_kw36i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hoi"]
 size = Vector2(16, 15)
@@ -38,6 +39,38 @@ region = Rect2(96, 0, 16, 16)
 atlas = ExtResource("2_jfsms")
 region = Rect2(112, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hucu"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3jao"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s3cv"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qitx0"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vli2"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvqq5"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1aer"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfw4u"]
+atlas = ExtResource("3_kw36i")
+region = Rect2(112, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_k722i"]
 animations = [{
 "frames": [{
@@ -66,7 +99,36 @@ animations = [{
 "texture": SubResource("AtlasTexture_rapgm")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hucu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3jao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0s3cv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qitx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vli2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvqq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1aer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfw4u")
+}],
+"loop": true,
+"name": &"left_walk",
 "speed": 5.0
 }]
 
@@ -79,3 +141,4 @@ shape = SubResource("RectangleShape2D_07hoi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k722i")
+animation = &"left_walk"

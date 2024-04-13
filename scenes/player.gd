@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 90
 @export var health = 100
-@onready var _idle = $AnimatedSprite2D
+@onready var _animation = $AnimatedSprite2D
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -19,4 +19,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	_idle.play()
+	if Input.is_action_just_pressed("left"):
+		_animation.stop()
+		_animation.play("left_walk")
+	if Input.is_action_just_released("left"):
+		_animation.stop()
+		_animation.play("idle")
