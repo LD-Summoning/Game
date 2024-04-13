@@ -5,8 +5,8 @@ extends CharacterBody2D
 
 @onready var player = get_parent().get_parent().get_parent().get_node("Player")
 @onready var cast_timer = $CastTimer
-@onready var fireball_scene = preload("res://scenes/fireball.tscn")
-@onready var fireball_parent = get_parent().get_node("CastedSpells")
+@onready var burning_area_scene = preload("res://scenes/BurningArea.tscn")
+@onready var burning_area_parent = get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D
 
 var can_cast = true
@@ -22,20 +22,20 @@ func _physics_process(_delta):
 		var direction = global_position.direction_to(next_path_pos)
 		velocity = direction * speed
 	if can_cast && can_see_player():
-		cast_timer.start()
-		cast_fireball()
+		cast_burning_area()
 		can_cast = false
+		cast_timer.start()
 	move_and_slide()
 
 
-func cast_fireball():
-	var fireball = fireball_scene.instantiate()
-	fireball.position = position
-	var direction = (player.position + player.velocity * 0.5 - position).normalized()
+func cast_burning_area():
+	var burning_area = burning_area_scene.instantiate()
+	burning_area.position = position
+	var direction = (player.position - position).normalized()
 	
-	fireball.velocity = direction * 300
-	fireball_parent.add_child(fireball)
-
+	burning_area.scale = Vector2(0.01, 0.01)
+	burning_area.target_position = player.position
+	burning_area_parent.add_child(burning_area)
 
 func make_path():
 	var player_position = player.position

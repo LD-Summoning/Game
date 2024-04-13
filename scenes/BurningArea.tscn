@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cehy02ptwnhm7"]
+[gd_scene load_steps=9 format=3 uid="uid://cehy02ptwnhm7"]
 
 [ext_resource type="Shader" path="res://shader/fire.gdshader" id="1_kcq53"]
+[ext_resource type="Script" path="res://enemy/burning_area/BurningArea.gd" id="1_vbenh"]
 
 [sub_resource type="Gradient" id="Gradient_c5w61"]
 offsets = PackedFloat32Array(0, 0.0900901, 0.0901639, 0.139344, 0.221311, 0.467213, 1)
@@ -23,9 +24,28 @@ generate_mipmaps = false
 seamless = true
 noise = SubResource("FastNoiseLite_u71bn")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wwrh7"]
+
 [node name="burning_area" type="Node2D"]
+script = ExtResource("1_vbenh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_qn05m")
 texture = SubResource("NoiseTexture2D_msf8j")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(26, 26)
+shape = SubResource("CircleShape2D_wwrh7")
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

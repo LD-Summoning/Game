@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://btbk41nxhucgu"]
+[gd_scene load_steps=5 format=3 uid="uid://btbk41nxhucgu"]
 
 [ext_resource type="Texture2D" uid="uid://csgtksdac2pdm" path="res://enemy/fire_demon/demon.png" id="1_i2emj"]
+[ext_resource type="Script" path="res://enemy/fire_demon/fire_demon.gd" id="1_n43ai"]
 [ext_resource type="Script" path="res://common/Health.gd" id="2_2vx51"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c8hve"]
@@ -9,6 +10,7 @@ radius = 14.0
 [node name="fire_demon" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
+script = ExtResource("1_n43ai")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_i2emj")
@@ -18,3 +20,15 @@ shape = SubResource("CircleShape2D_c8hve")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_2vx51")
+
+[node name="PathfindingTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="CastTimer" type="Timer" parent="."]
+wait_time = 15.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
+[connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]
