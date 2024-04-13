@@ -31,8 +31,8 @@ enum Direction{
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
-var roll_direction_vector
 var can_roll = true
+var roll_direction_vector
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -79,10 +79,10 @@ func get_move_direction() -> Direction:
 		return Direction.LEFT
 			
 
-# !todo: Nach der Rolle muss der AnimationState des Spielers neu gesetzt werden!
 func _on_roll_timer_timeout():
 	rolling = false
 	_health.revoke_invincibility()
+	update_animationState()
 	_animation.stop()
 	_animation.play(animationStateMap(state))
 	set_collision_mask_value(3, true)
@@ -129,6 +129,18 @@ func changeAnimationState(action: StringName):
 	state = animation
 	_animation.stop()
 	_animation.play(animationStateMap(animation))
+	
+func update_animationState():
+	if Input.is_action_pressed("down"):
+		state = AnimationStates.DOWN
+	elif Input.is_action_pressed("right"):
+		state = AnimationStates.RIGHT
+	elif Input.is_action_pressed("up"):
+		state = AnimationStates.UP
+	elif Input.is_action_pressed("left"):
+		state = AnimationStates.LEFT
+	else:
+		state = AnimationStates.IDLE
 
 func _input(event):
 	if rolling:
