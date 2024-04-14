@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnd05lhjqhlc2"]
+[gd_scene load_steps=4 format=3 uid="uid://bnd05lhjqhlc2"]
 
-[ext_resource type="PackedScene" uid="uid://bjo585dmglbid" path="res://levels/Level1.tscn" id="1_m0ma4"]
+[ext_resource type="PackedScene" uid="uid://bjo585dmglbid" path="res://levels/level_1.tscn" id="1_m0ma4"]
 [ext_resource type="PackedScene" uid="uid://bqnmlnjkhs2tk" path="res://scenes/player.tscn" id="2_vo3os"]
+[ext_resource type="Script" path="res://levels/LevelSwitcher.gd" id="3_edjhe"]
 
 [node name="Main Scene" type="Node"]
 
@@ -12,3 +13,12 @@
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0, 0, 0, 1)
+
+[node name="LevelSwitcher" type="Node" parent="."]
+script = ExtResource("3_edjhe")
+
+[node name="LevelSwitchCooldown" type="Timer" parent="LevelSwitcher"]
+one_shot = true
+
+[connection signal="scene_change" from="Level" to="LevelSwitcher" method="_on_level_scene_change"]
+[connection signal="timeout" from="LevelSwitcher/LevelSwitchCooldown" to="LevelSwitcher" method="_on_level_switch_cooldown_timeout"]

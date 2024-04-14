@@ -4,7 +4,7 @@ extends Node
 @export var _invincible = 0
 
 signal death
-signal health_changed(from, to)
+signal health_changed(from: int, to: int)
 
 
 func _on_damage(damage: int):
