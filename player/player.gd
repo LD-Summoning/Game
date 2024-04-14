@@ -24,17 +24,27 @@ enum Direction{
 @export var roll_time = 0.5
 @export var roll_cooldown = 0.8
 @export var attack_cooldown = 0.5
+@export var attack_time = 0.3
+@export var attack_update_time = 0.025
+@export var swipe_angle = deg_to_rad(135)
 
-@onready var _animation = $AnimatedSprite2D
+
+@onready var _animation = $PlayerSprite
 @onready var _health = $Health
 @onready var _roll_timer = $RollTimer
 @onready var _roll_cooldown_timer = $RollCooldown
 @onready var _attack_cooldown_timer = $AttackCooldownTimer
+@onready var _attack_timer = $AttackTimer
+@onready var _attack_anchor = $AttackAnchor
+@onready var _attack_update_timer = $AttackUpdateTimer
+@onready var _attack_area = $AttackAnchor/AttackArea
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
 var can_roll = true
 var roll_direction_vector
+var attacking = false
+var can_attack = true
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -52,8 +62,43 @@ func _ready():
 	_animation.play("idle")
 
 
+
+# Attacking
+
+
+const attack_anchor_distance = 6
 func attack():
-	var attack_direction = get_local_mouse_position()
+	var attack_direction = Vector2.RIGHT.angle_to(get_local_mouse_position())
+	_attack_timer.start(attack_time)
+	_attack_update_timer.start(attack_update_time)
+	_attack_cooldown_timer.start(attack_cooldown)
+	attacking = true
+	can_attack = false
+	_attack_anchor.visible = true
+	_attack_anchor.rotation = attack_direction - swipe_angle/2
+	_attack_area.set_collision_mask_value(3, true)
+
+
+func _on_attack_update_timer_timeout():
+	_attack_anchor.rotation += swipe_angle * attack_update_time / attack_time
+
+
+func stop_attack():
+	_attack_update_timer.stop()
+	_attack_anchor.visible = false
+	attacking = false
+
+
+func _on_attack_timer_timeout():
+	stop_attack()
+
+
+func _on_attack_cooldown_timer_timeout():
+	can_attack = true
+
+
+
+# Rolling
 
 
 func roll_direction_map(roll_direction: Direction) -> StringName:
@@ -63,8 +108,7 @@ func roll_direction_map(roll_direction: Direction) -> StringName:
 		Direction.LEFT, Direction.UP_LEFT, Direction.DOWN_LEFT: return "rolling_left"
 		Direction.RIGHT, Direction.DOWN_RIGHT, Direction. UP_RIGHT: return "rolling_right"
 	return "rolling_left"
-	
-	
+
 
 func get_move_direction() -> Direction:
 	if Input.is_action_pressed("up"):
@@ -85,20 +129,6 @@ func get_move_direction() -> Direction:
 		return Direction.RIGHT
 	else:
 		return Direction.LEFT
-			
-
-func _on_roll_timer_timeout():
-	rolling = false
-	_health.revoke_invincibility()
-	update_animationState()
-	_animation.stop()
-	_animation.play(animationStateMap(state))
-	set_collision_mask_value(3, true)
-	set_collision_mask_value(4, true)
-	set_collision_layer_value(1, true)
-
-func _on_roll_cooldown_timeout():
-	can_roll = true
 
 
 func roll():
@@ -114,7 +144,26 @@ func roll():
 	set_collision_mask_value(3, false)
 	set_collision_mask_value(4, false)
 	set_collision_layer_value(1, false)
-	
+
+
+func _on_roll_timer_timeout():
+	rolling = false
+	_health.revoke_invincibility()
+	update_animationState()
+	_animation.stop()
+	_animation.play(animationStateMap(state))
+	set_collision_mask_value(3, true)
+	set_collision_mask_value(4, true)
+	set_collision_layer_value(1, true)
+
+
+func _on_roll_cooldown_timeout():
+	can_roll = true
+
+
+
+# Animations
+
 
 func animationStateMap(state: AnimationStates) -> StringName:
 	match state:
@@ -124,6 +173,7 @@ func animationStateMap(state: AnimationStates) -> StringName:
 		AnimationStates.DOWN: return "down_walk"
 		_: return "idle"
 
+
 func actionStateMap(action: StringName) -> AnimationStates:
 	match action:
 		"left": return AnimationStates.LEFT
@@ -131,13 +181,15 @@ func actionStateMap(action: StringName) -> AnimationStates:
 		"up": return AnimationStates.UP
 		"down": return AnimationStates.DOWN
 		_: return AnimationStates.IDLE
-		
+
+
 func changeAnimationState(action: StringName):
 	var animation = actionStateMap(action)
 	state = animation
 	_animation.stop()
 	_animation.play(animationStateMap(animation))
-	
+
+
 func update_animationState():
 	if Input.is_action_pressed("down"):
 		state = AnimationStates.DOWN
@@ -150,12 +202,15 @@ func update_animationState():
 	else:
 		state = AnimationStates.IDLE
 
+
 func _input(event):
 	if rolling:
 		return
-	if event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
+	elif event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
 		roll()
 		return
+	elif can_attack and !attacking and event.is_action_pressed("attack"):
+		attack()
 	match state:
 		AnimationStates.IDLE:
 			if event.is_action_pressed("down"):
@@ -211,8 +266,11 @@ func _input(event):
 				changeAnimationState("up")
 			elif event.is_action_released("left"):
 				changeAnimationState("idle")
-	
-	
+
+
+
+# Processing
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass

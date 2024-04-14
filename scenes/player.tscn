@@ -1,8 +1,9 @@
-[gd_scene load_steps=82 format=3 uid="uid://bqnmlnjkhs2tk"]
+[gd_scene load_steps=86 format=3 uid="uid://bqnmlnjkhs2tk"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://mq7b8xjxsghq" path="res://player/Oktopus_Animation.png" id="2_xvn55"]
 [ext_resource type="Script" path="res://common/Health.gd" id="4_o31k1"]
+[ext_resource type="Texture2D" uid="uid://dcnyp7n4ktva" path="res://player/staff_primitive.png" id="5_mrgge"]
 [ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="5_qrj7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hoi"]
@@ -579,16 +580,34 @@ func _process(delta):
 	pass
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cw1ci"]
+size = Vector2(16, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcdyn"]
+atlas = ExtResource("5_mrgge")
+region = Rect2(0, 0, 16, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2wtud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcdyn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_pu3yh")
 roll_cooldown = 0.7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_07hoi")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k722i")
 animation = &"rolling_down"
 
@@ -610,6 +629,27 @@ script = SubResource("GDScript_4q8am")
 one_shot = true
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackUpdateTimer" type="Timer" parent="."]
+
+[node name="AttackAnchor" type="Marker2D" parent="."]
+visible = false
+
+[node name="AttackArea" type="Area2D" parent="AttackAnchor"]
+
+[node name="AttackCollision" type="CollisionShape2D" parent="AttackAnchor/AttackArea"]
+position = Vector2(17, -1)
+shape = SubResource("RectangleShape2D_cw1ci")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackAnchor/AttackArea/AttackCollision"]
+sprite_frames = SubResource("SpriteFrames_2wtud")
 
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
 [connection signal="timeout" from="RollCooldown" to="." method="_on_roll_cooldown_timeout"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackUpdateTimer" to="." method="_on_attack_update_timer_timeout"]
