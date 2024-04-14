@@ -622,11 +622,13 @@ texture = ExtResource("5_qrj7x")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="FishShotDelayTimer" type="Timer" parent="."]
+
 [node name="RollTimer" type="Timer" parent="."]
 one_shot = true
 script = SubResource("GDScript_4q8am")
 
-[node name="RollCooldown" type="Timer" parent="."]
+[node name="RollCooldownTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
@@ -651,8 +653,9 @@ shape = SubResource("RectangleShape2D_cw1ci")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackAnchor/AttackArea/AttackCollision"]
 sprite_frames = SubResource("SpriteFrames_2wtud")
 
+[connection signal="timeout" from="FishShotDelayTimer" to="." method="_on_fish_shot_delay_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
-[connection signal="timeout" from="RollCooldown" to="." method="_on_roll_cooldown_timeout"]
+[connection signal="timeout" from="RollCooldownTimer" to="." method="_on_roll_cooldown_timeout"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackUpdateTimer" to="." method="_on_attack_update_timer_timeout"]

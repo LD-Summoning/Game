@@ -28,17 +28,20 @@ enum Direction{
 @export var attack_update_time = 0.025
 @export var swipe_angle = deg_to_rad(135)
 @export var melee_damage = 10
+@export var fish_spawn_delay = 0.1
 
 
 @onready var _animation = $PlayerSprite
 @onready var _health = $Health
 @onready var _roll_timer = $RollTimer
-@onready var _roll_cooldown_timer = $RollCooldown
+@onready var _roll_cooldown_timer = $RollCooldownTimer
 @onready var _attack_cooldown_timer = $AttackCooldownTimer
 @onready var _attack_timer = $AttackTimer
 @onready var _attack_anchor = $AttackAnchor
 @onready var _attack_update_timer = $AttackUpdateTimer
 @onready var _attack_area = $AttackAnchor/AttackArea
+@onready var _fish_shot_delay_timer = $FishShotDelayTimer
+@onready var _fish_scene = preload("res://scenes/fish.tscn")
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
@@ -47,6 +50,8 @@ var roll_direction_vector
 var attacking = false
 var can_attack = true
 var attack_hit_targets = []
+var fish_channeling = false
+
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -64,11 +69,9 @@ func _ready():
 	_animation.play("idle")
 
 
-
 # Attacking
 
 
-const attack_anchor_distance = 6
 func attack():
 	var attack_direction = Vector2.RIGHT.angle_to(get_local_mouse_position())
 	attack_hit_targets = []
@@ -109,6 +112,52 @@ func _on_attack_timer_timeout():
 func _on_attack_cooldown_timer_timeout():
 	can_attack = true
 
+
+# Spells
+
+
+# Fishes
+
+
+func start_fish_cast():
+	fish_channeling = true
+	_fish_shot_delay_timer.start(fish_spawn_delay)
+	
+
+
+func shoot_fish():
+	var fish = _fish_scene.instantiate()
+	fish.position = position
+	fish.velocity = 100 * (get_local_mouse_position() - position)
+	
+
+func _on_fish_shot_delay_timeout():
+	shoot_fish()
+
+
+func stop_fish_cast():
+	_fish_shot_delay_timer.stop()
+	fish_channeling = false
+
+
+# Tentacle Slap
+
+func start_tentacle_slap():
+	pass
+	
+
+func stop_tentacle_slap():
+	pass
+
+
+# Wave_Ultimate
+
+func start_wave_ultimate():
+	pass
+	
+	
+func stop_wave_ultimate():
+	pass
 
 
 # Rolling
@@ -222,10 +271,18 @@ func _input(event):
 	elif event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
 		if attacking:
 			stop_attack()
+		if fish_channeling:
+			stop_fish_cast()
 		roll()
 		return
 	elif can_attack and !attacking and event.is_action_pressed("attack"):
+		if fish_channeling:
+			stop_fish_cast()
 		attack()
+	elif !fish_channeling and event.is_action_pressed("cast_spell"):
+		start_fish_cast()
+	elif fish_channeling and event.is_action_released("cast_spell"):
+		stop_fish_cast()
 	match state:
 		AnimationStates.IDLE:
 			if event.is_action_pressed("down"):
@@ -289,4 +346,3 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
