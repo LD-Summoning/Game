@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bqnmlnjkhs2tk"]
+[gd_scene load_steps=89 format=3 uid="uid://bqnmlnjkhs2tk"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://mq7b8xjxsghq" path="res://player/Oktopus_Animation.png" id="2_xvn55"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cwmy4jx62722a" path="res://player/Tentakel_Melee.png" id="5_ig46o"]
 [ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="5_qrj7x"]
 [ext_resource type="Texture2D" uid="uid://i50ic1nkae7m" path="res://common/Circle_smol.png" id="6_g671e"]
+[ext_resource type="Texture2D" uid="uid://bs3t2ebdg2q4l" path="res://common/Circle_middle.png" id="7_lkv6p"]
+[ext_resource type="PackedScene" uid="uid://ctyaclgm7rht2" path="res://player/tentacle_slap.tscn" id="8_g2rvk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hoi"]
 size = Vector2(16, 15)
@@ -640,6 +642,9 @@ one_shot = true
 
 [node name="AttackUpdateTimer" type="Timer" parent="."]
 
+[node name="TentacleSlapCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="AttackAnchor" type="Marker2D" parent="."]
 visible = false
 
@@ -663,6 +668,14 @@ position = Vector2(14, 0)
 rotation = 1.5708
 texture = ExtResource("6_g671e")
 
+[node name="TentacleSlapCircle" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_lkv6p")
+hframes = 2
+frame = 1
+
+[node name="SlapCollisionArea" parent="." instance=ExtResource("8_g2rvk")]
+
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="timeout" from="FishShotDelayTimer" to="." method="_on_fish_shot_delay_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
@@ -670,4 +683,5 @@ texture = ExtResource("6_g671e")
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackUpdateTimer" to="." method="_on_attack_update_timer_timeout"]
+[connection signal="timeout" from="TentacleSlapCooldownTimer" to="." method="_on_tentacle_slap_cooldown_timer_timeout"]
 [connection signal="body_entered" from="AttackAnchor/AttackArea" to="." method="_on_attack_area_body_entered"]

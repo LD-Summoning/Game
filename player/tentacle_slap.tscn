@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://ctyaclgm7rht2"]
+
+[ext_resource type="Texture2D" uid="uid://ct02vjrkntwcx" path="res://player/Tentakel_summon-Sheet.png" id="1_c4oar"]
+[ext_resource type="Script" path="res://player/tentacle_slap.gd" id="1_e5yl5"]
+[ext_resource type="Texture2D" uid="uid://bs3t2ebdg2q4l" path="res://common/Circle_middle.png" id="2_xq8nw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1m2d"]
+atlas = ExtResource("1_c4oar")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyr7d"]
+atlas = ExtResource("1_c4oar")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exaw7"]
+atlas = ExtResource("1_c4oar")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnogi"]
+atlas = ExtResource("1_c4oar")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t63f2"]
+atlas = ExtResource("1_c4oar")
+region = Rect2(64, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjxmi"]
+atlas = ExtResource("1_c4oar")
+region = Rect2(80, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hvlmg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1m2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyr7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exaw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnogi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t63f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjxmi")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2hq47"]
+
+[node name="SlapCollisionArea" type="Area2D"]
+position = Vector2(20, 0)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_e5yl5")
+
+[node name="SlapTentacle" type="AnimatedSprite2D" parent="."]
+top_level = true
+position = Vector2(21, -8)
+sprite_frames = SubResource("SpriteFrames_hvlmg")
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionArea" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_2hq47")
+
+[node name="TentacleSlapCircle" type="Sprite2D" parent="."]
+texture = ExtResource("2_xq8nw")
+hframes = 2
+frame = 1
+
+[node name="SlapTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SlapTimer" to="." method="_on_slap_timer_timeout"]

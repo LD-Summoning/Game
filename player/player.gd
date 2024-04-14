@@ -31,6 +31,9 @@ enum Direction{
 @export var swipe_angle = deg_to_rad(135)
 @export var melee_damage = 10
 @export var fish_spawn_delay = 0.1
+@export var tentacle_slap_cooldown = 5
+@export var tentacle_slap_damage = 30
+@export var tentacle_slap_duration = 1
 
 
 @onready var _animation = $PlayerSprite
@@ -46,6 +49,11 @@ enum Direction{
 @onready var _fish_scene = preload("res://scenes/fish.tscn")
 @onready var _player_spells_parent = get_parent().get_node("PlayerCasts")
 @onready var _fish_summon_circle_anchor = $FishSummonAnchor
+@onready var _tentacle_circle_sprite = $TentacleSlapCircle
+@onready var _tentacle_slap_timer = $TentacleSlapTimer
+@onready var _slap_cooldown_timer = $TentacleSlapCooldownTimer
+@onready var _slap_scene = preload("res://player/tentacle_slap.tscn")
+
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
@@ -55,6 +63,10 @@ var attacking = false
 var can_attack = true
 var attack_hit_targets = []
 var fish_channeling = false
+var is_preparing_slap = false
+var can_slap = true
+var slap_hit_targets = []
+var slap_instance
 
 
 func get_input():
@@ -74,7 +86,10 @@ func _ready():
 
 
 func _process(delta):
-	_fish_summon_circle_anchor.rotation = Vector2.RIGHT.angle_to(get_local_mouse_position())
+	if fish_channeling:
+		_fish_summon_circle_anchor.rotation = Vector2.RIGHT.angle_to(get_local_mouse_position())
+	elif is_preparing_slap:
+		_tentacle_circle_sprite.global_position = get_global_mouse_position()
 
 
 # Attacking
@@ -122,7 +137,6 @@ func _on_attack_cooldown_timer_timeout():
 
 # Spells
 
-
 # Fishes
 
 
@@ -154,12 +168,32 @@ func stop_fish_cast():
 
 # Tentacle Slap
 
-func start_tentacle_slap():
-	pass
-	
 
-func stop_tentacle_slap():
-	pass
+func start_preparing_slap():
+	is_preparing_slap = true
+	_tentacle_circle_sprite.visible = true
+	_tentacle_circle_sprite.global_position = get_global_mouse_position()
+
+
+func stop_preparing_slap():
+	is_preparing_slap = false
+	_tentacle_circle_sprite.visible = false
+
+
+func start_tentacle_slap():
+	is_preparing_slap = false
+	can_slap = false
+	_slap_cooldown_timer.start(tentacle_slap_cooldown)
+	var target_position = get_global_mouse_position()
+	_tentacle_circle_sprite.global_position = target_position
+	_tentacle_slap_timer.start(tentacle_slap_duration)
+	var slap_instance = _slap_scene.instantiate()
+	slap_instance.tentacle_slap_damage = tentacle_slap_damage
+	slap_instance.tentacle_slap_duration = tentacle_slap_duration
+
+
+func _on_tentacle_slap_cooldown_timer_timeout():
+	can_slap = true
 
 
 # Wave_Ultimate
@@ -287,16 +321,28 @@ func _input(event):
 			stop_attack()
 		if fish_channeling:
 			stop_fish_cast()
+		if is_preparing_slap:
+			stop_preparing_slap()
 		roll()
 		return
 	elif can_attack and !attacking and event.is_action_pressed("attack"):
 		if fish_channeling:
 			stop_fish_cast()
+		if is_preparing_slap:
+			stop_preparing_slap()
 		attack()
 	elif !fish_channeling and event.is_action_pressed("fish_cast"):
-		start_fish_cast()
+		if is_preparing_slap:
+			start_tentacle_slap()
+		else:
+			start_fish_cast()
 	elif fish_channeling and event.is_action_released("fish_cast"):
 		stop_fish_cast()
+	elif can_slap and event.is_action_pressed("tentacle_cast"):
+		if !is_preparing_slap:
+			start_preparing_slap()
+		else:
+			stop_preparing_slap()
 	match state:
 		AnimationStates.IDLE:
 			if event.is_action_pressed("down"):
