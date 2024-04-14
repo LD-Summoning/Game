@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0gwjrkr0mtl4"]
+
+[ext_resource type="PackedScene" uid="uid://bahiwly305vcs" path="res://scenes/caster.tscn" id="1_i26so"]
+[ext_resource type="PackedScene" uid="uid://3iql62g3vw3m" path="res://scenes/fireball.tscn" id="2_obdgr"]
+[ext_resource type="Shader" path="res://shader/damage_effect.gdshader" id="3_go06h"]
+[ext_resource type="Texture2D" uid="uid://c7ek30hlrsda7" path="res://enemy/fire_imp/fire_imp.png" id="4_fs0xb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfoln"]
+resource_local_to_scene = true
+shader = ExtResource("3_go06h")
+shader_parameter/flash_red = false
+
+[node name="FireImp" type="Node2D"]
+
+[node name="Imp" parent="." node_paths=PackedStringArray("sprite2d") instance=ExtResource("1_i26so")]
+projectile_scene = ExtResource("2_obdgr")
+sprite2d = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Imp"]
+material = SubResource("ShaderMaterial_sfoln")
+texture = ExtResource("4_fs0xb")
+hframes = 8
+vframes = 3

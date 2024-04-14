@@ -136,7 +136,7 @@ func _on_death_timer_timeout():
 
 func _on_death():
 	if animation_state != AnimationState.DYING:
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.call_deferred("disabled", true)
 		animation_state = AnimationState.DYING
 		if sprite2d != null:
 			sprite2d.frame = AnimationState.DYING
