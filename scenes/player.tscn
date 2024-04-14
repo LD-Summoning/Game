@@ -447,7 +447,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"rolling_down",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -476,7 +476,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"rolling_left",
-"speed": 7.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -505,7 +505,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"rolling_right",
-"speed": 7.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -534,7 +534,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"rolling_up",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -582,6 +582,7 @@ func _process(delta):
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_pu3yh")
+roll_cooldown = 0.7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -589,7 +590,7 @@ shape = SubResource("RectangleShape2D_07hoi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k722i")
-animation = &"rolling_down"
+animation = &"rolling_up"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_o31k1")

@@ -22,7 +22,7 @@ enum Direction{
 @export var speed = 90
 @export var roll_speed = 200
 @export var roll_time = 0.5
-@export var roll_cooldown = 1
+@export var roll_cooldown = 0.8
 
 @onready var _animation = $AnimatedSprite2D
 @onready var _health = $Health
@@ -145,7 +145,7 @@ func update_animationState():
 func _input(event):
 	if rolling:
 		return
-	elif event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
+	if event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
 		roll()
 		return
 	match state:
