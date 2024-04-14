@@ -8,7 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0e4ix"]
 shader = ExtResource("4_h05d6")
-shader_parameter/fill_level = 0.5
+shader_parameter/health = 1.0
 
 [node name="Main Scene" type="Node"]
 
@@ -41,10 +41,13 @@ size_flags_vertical = 8
 
 [node name="WaterBottle" type="TextureRect" parent="UI Layer/Control"]
 material = SubResource("ShaderMaterial_0e4ix")
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.333, 0.333)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_right = 32.0
+grow_vertical = 0
 texture = ExtResource("4_pthhu")
 
 [node name="PlayerCasts" type="Node2D" parent="."]
