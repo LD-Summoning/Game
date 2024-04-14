@@ -14,6 +14,8 @@ script = ExtResource("1_n43ai")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_i2emj")
+hframes = 8
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_c8hve")
@@ -30,5 +32,24 @@ wait_time = 5.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="StartCastingTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StartMovingTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
 [connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
+[connection signal="timeout" from="StartCastingTimer" to="." method="_on_start_casting_timer_timeout"]
+[connection signal="timeout" from="StartMovingTimer" to="." method="_on_start_moving_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1sixnwkab6tb"
-path="res://.godot/imported/walltiles.png-eefd918fcf9895e4803ecaee7573730f.ctex"
+uid="uid://4ypl0de3pc4c"
+path="res://.godot/imported/Tur_doppelt-Sheet.png-9013e3fed7c317508f4eb35ffa804244.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://background/walltiles.png"
-dest_files=["res://.godot/imported/walltiles.png-eefd918fcf9895e4803ecaee7573730f.ctex"]
+source_file="res://background/Tur_doppelt-Sheet.png"
+dest_files=["res://.godot/imported/Tur_doppelt-Sheet.png-9013e3fed7c317508f4eb35ffa804244.ctex"]
 
 [params]
 

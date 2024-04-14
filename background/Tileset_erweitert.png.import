@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhadeiluftkey"
-path="res://.godot/imported/floortiles.png-d3b2058c10d7ec097e1dfa41ef5a8af9.ctex"
+uid="uid://bigvt1lxk7p78"
+path="res://.godot/imported/Tileset_erweitert.png-51026b1b854dc1d7dde5d444653a9dc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://background/floortiles.png"
-dest_files=["res://.godot/imported/floortiles.png-d3b2058c10d7ec097e1dfa41ef5a8af9.ctex"]
+source_file="res://background/Tileset_erweitert.png"
+dest_files=["res://.godot/imported/Tileset_erweitert.png-51026b1b854dc1d7dde5d444653a9dc1.ctex"]
 
 [params]
 
