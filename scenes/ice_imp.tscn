@@ -13,7 +13,6 @@ collision_mask = 7
 script = ExtResource("1_iixbc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.00392157, 1, 1, 1)
 texture = ExtResource("1_iqb73")
 hframes = 8
 vframes = 3
