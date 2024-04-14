@@ -46,7 +46,7 @@ var can_roll = true
 var roll_direction_vector
 var attacking = false
 var can_attack = true
-var attack_hit_targets
+var attack_hit_targets = []
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -99,6 +99,7 @@ func stop_attack():
 	for body in attack_hit_targets:
 		if body.has_node("Health"):
 			body.get_node("Health").signal_damage(melee_damage)
+	attack_hit_targets = []
 
 
 func _on_attack_timer_timeout():
@@ -219,6 +220,7 @@ func _input(event):
 	if rolling:
 		return
 	elif event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
+		stop_attack()
 		roll()
 		return
 	elif can_attack and !attacking and event.is_action_pressed("attack"):

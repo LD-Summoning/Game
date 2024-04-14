@@ -9,7 +9,7 @@ signal health_changed(from: int, to: int)
 
 func _on_damage(damage: int):
 	_health = _health - damage
-	print("Took damage: "+str(damage))
+	print(get_parent().name + " took damage: " + str(damage))
 	health_changed.emit(_health + damage, _health)
 	if _health <= 0:
 		death.emit()
