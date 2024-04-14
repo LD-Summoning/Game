@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx238sp6bud4u"]
+
+[ext_resource type="Script" path="res://common/SummoningCircle.gd" id="1_3hd8q"]
+[ext_resource type="Texture2D" uid="uid://bs3t2ebdg2q4l" path="res://common/Circle_middle.png" id="2_tm804"]
+
+[node name="SummoningCircle" type="Node2D"]
+script = ExtResource("1_3hd8q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tm804")
+hframes = 2
+
+[node name="SummonTimer" type="Timer" parent="."]
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SummonTimer" to="." method="_on_summon_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

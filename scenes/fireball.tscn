@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://3iql62g3vw3m"]
+[gd_scene load_steps=12 format=3 uid="uid://3iql62g3vw3m"]
 
 [ext_resource type="Texture2D" uid="uid://cab546vm3aqjx" path="res://enemy/fireball/fireball.png" id="1_3qka6"]
 [ext_resource type="Script" path="res://common/projectile.gd" id="1_y3sge"]
@@ -7,13 +7,60 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhq8y"]
 size = Vector2(7, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1afly"]
+atlas = ExtResource("1_3qka6")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vf5uh"]
+atlas = ExtResource("1_3qka6")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agpc5"]
+atlas = ExtResource("1_3qka6")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rosdb"]
+atlas = ExtResource("1_3qka6")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g7ow"]
+atlas = ExtResource("1_3qka6")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a75as"]
+atlas = ExtResource("1_3qka6")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_45lmq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1afly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vf5uh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agpc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rosdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g7ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a75as")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
 [node name="Fireball" type="Area2D"]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_y3sge")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3qka6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
@@ -25,5 +72,9 @@ color = Color(1, 0.85098, 0, 1)
 energy = 0.3
 shadow_enabled = true
 texture = ExtResource("3_0h85g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_45lmq")
+autoplay = "default"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,17 +2,16 @@ extends CharacterBody2D
 
 
 @export var speed = 50
-@export var projectile_scene: PackedScene
-@export var sprite2d: Sprite2D
 @export var animated_sprite2d: AnimatedSprite2D
+@export var summonables: Array[PackedScene]
 
 @onready var player = get_parent().get_parent().get_parent().get_parent().get_node("Player")
 @onready var cast_timer = $CastTimer
-@onready var fireball_parent = get_parent().get_parent().get_node("CastedSpells")
+@onready var summonables_parent = get_parent().get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D
-var shader: ShaderMaterial
+@onready var shader = animated_sprite2d.material
 
-var can_cast = true
+var can_summon = true
 var active = false
 var moving_left = false
 
@@ -24,11 +23,6 @@ enum AnimationState {
 
 var animation_state = AnimationState.IDLE
 
-func _ready():
-	if animated_sprite2d != null:
-		shader = animated_sprite2d.material
-	else:
-		shader = sprite2d.material
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(_delta):
@@ -40,21 +34,18 @@ func _physics_process(_delta):
 			var direction = global_position.direction_to(next_path_pos)
 			velocity = direction * speed
 			animation_state = AnimationState.MOVING
-		if can_cast && can_see_player():
+		if can_summon && can_see_player():
 			cast_timer.start()
-			cast_fireball()
-			can_cast = false
+			summon_random_enemy()
+			can_summon = false
 	moving_left = velocity.x < 0
 	move_and_slide()
 
 
-func cast_fireball():
-	var fireball = projectile_scene.instantiate()
-	fireball.position = global_position
-	var direction = (player.position + player.velocity * 0.5 - global_position).normalized()
-	
-	fireball.velocity = direction * 300
-	fireball_parent.add_child(fireball)
+func summon_random_enemy():
+	var enemy = summonables[randi() % summonables.size()]
+	enemy.position = global_position
+	summonables_parent.add_child(enemy)
 
 
 func make_path():
@@ -85,7 +76,7 @@ func can_see_player() -> bool:
 
 
 func _on_cast_timer_timeout():
-	can_cast = true
+	can_summon = true
 
 
 func _on_pathfinding_timer_timeout():
@@ -93,22 +84,7 @@ func _on_pathfinding_timer_timeout():
 
 
 func _on_animation_timer_timeout():
-	if sprite2d != null:
-		animate_sprite_frames()
-	else:
-		animate_with_animations()
-
-
-func animate_sprite_frames():
-	if animation_state == AnimationState.DYING && sprite2d.frame == animation_state + 7:
-		return # Leave enemy in last dying frame if not dead yet
-	var start_frame: int = animation_state
-	var new_frame = sprite2d.frame + 1
-	if new_frame >= start_frame + 8:
-		new_frame = start_frame
-	elif new_frame < start_frame:
-		new_frame = start_frame
-	sprite2d.frame = new_frame
+	animate_with_animations()
 
 
 func animate_with_animations():
@@ -138,8 +114,6 @@ func _on_death():
 	if animation_state != AnimationState.DYING:
 		$CollisionShape2D.set_deferred("disabled", true)
 		animation_state = AnimationState.DYING
-		if sprite2d != null:
-			sprite2d.frame = AnimationState.DYING
 		$DeathTimer.start()
 
 
