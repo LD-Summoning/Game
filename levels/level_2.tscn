@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0q2n8vwx330k"]
+[gd_scene load_steps=8 format=3 uid="uid://d0q2n8vwx330k"]
 
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_k3dkd"]
 [ext_resource type="TileSet" uid="uid://cfga83ddv1htv" path="res://background/tileset.tres" id="2_kh7k3"]
 [ext_resource type="Script" path="res://player/PlayerStartPos.gd" id="3_nwhgm"]
 [ext_resource type="PackedScene" uid="uid://hpc1asacwnb1" path="res://scenes/yeti.tscn" id="4_m2idx"]
 [ext_resource type="PackedScene" uid="uid://cr54n4tv8h007" path="res://scenes/ice_imp.tscn" id="5_4wqxq"]
+[ext_resource type="PackedScene" uid="uid://bc7rbmkkhpd31" path="res://levels/spawner.tscn" id="6_cijsk"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wn2wp"]
 vertices = PackedVector2Array(1143, -131, 1143, -97, 1111, -97, 981, -131, 981, -83, 1111, 31, 839, 31, 805, -83, 805, 173, 839, 173, 871, 173, 871, 191, 855, 191, 855, 207, 839, 207, 839, 223, 823, 223, 823, 333, 839, 333, 839, 349, 855, 349, 855, 365, 871, 365, 871, 381, 887, 381, 887, 447, 871, 447, 871, 463, 855, 463, 613, 271, 855, 479, 613, 479, 407, 271, 407, 287, 391, 287, 247, 109, 391, 303, 279, 303, 197, 109, 117, 125, 279, 319, 247, 319, 101, 141, 5, 221, 69, 157, 247, 335, 215, 335, 5, 271, 215, 367, 183, 367, 37, 351, 183, 383, 151, 383, 53, 367, 151, 399, 69, 399, 69, 383, 53, 383, 37, 367, 5, 351, -43, 271, -43, 255, -11, 237, -59, 255, -59, 237, -11, 221, 5, 141, 23, 141, 23, 157, 69, 141, 101, 125, 117, 109, 197, -35, 247, -35, 359, 109, 359, 125, 391, 125, 391, 141, 407, 141, 407, 237, 613, 237, 613, 173)
@@ -36,17 +37,20 @@ script = ExtResource("3_nwhgm")
 [node name="Yeti" parent="Enemies" instance=ExtResource("4_m2idx")]
 position = Vector2(175, 132)
 
-[node name="Yeti2" parent="Enemies" instance=ExtResource("4_m2idx")]
-position = Vector2(559, 352)
-
-[node name="Yeti3" parent="Enemies" instance=ExtResource("4_m2idx")]
-position = Vector2(604, 304)
-
-[node name="IceImp" parent="Enemies" instance=ExtResource("5_4wqxq")]
-position = Vector2(542, 180)
-
 [node name="IceImp2" parent="Enemies" instance=ExtResource("5_4wqxq")]
 position = Vector2(-59, 203)
+
+[node name="Spawner" parent="Enemies" instance=ExtResource("6_cijsk")]
+position = Vector2(562, 203)
+scene_to_spawn = ExtResource("4_m2idx")
+
+[node name="Spawner2" parent="Enemies" instance=ExtResource("6_cijsk")]
+position = Vector2(593, 268)
+scene_to_spawn = ExtResource("4_m2idx")
+
+[node name="Spawner3" parent="Enemies" instance=ExtResource("6_cijsk")]
+position = Vector2(549, 338)
+scene_to_spawn = ExtResource("5_4wqxq")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-142, -70)

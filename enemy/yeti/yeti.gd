@@ -52,7 +52,7 @@ func make_path():
 func _on_pathfinding_timer_timeout():
 	if !attack_in_progress:
 		make_path()
-
+ 
 
 func _on_attack_timer_timeout():
 	if animation_state != AnimationState.DYING:
