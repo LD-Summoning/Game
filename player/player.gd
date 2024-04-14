@@ -173,16 +173,19 @@ func start_preparing_slap():
 	is_preparing_slap = true
 	_tentacle_circle_sprite.visible = true
 	_tentacle_circle_sprite.global_position = get_global_mouse_position()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 func stop_preparing_slap():
 	is_preparing_slap = false
 	_tentacle_circle_sprite.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func start_tentacle_slap():
 	is_preparing_slap = false
 	can_slap = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_slap_cooldown_timer.start(tentacle_slap_cooldown)
 	_tentacle_circle_sprite.visible = false
 	var slap_instance = _slap_scene.instantiate()
@@ -325,11 +328,11 @@ func _input(event):
 			stop_preparing_slap()
 		roll()
 		return
+	elif is_preparing_slap and event.is_action_pressed("attack"):
+		start_tentacle_slap()
 	elif can_attack and !attacking and event.is_action_pressed("attack"):
 		if fish_channeling:
 			stop_fish_cast()
-		if is_preparing_slap:
-			stop_preparing_slap()
 		attack()
 	elif !fish_channeling and event.is_action_pressed("fish_cast"):
 		if is_preparing_slap:
