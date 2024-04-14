@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var summonables_parent = get_parent().get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D
 @onready var shader = animated_sprite2d.material
+@onready var summoning_circle_scene = preload("res://scenes/SummoningCircle.tscn")
 
 var can_summon = true
 var active = false
@@ -44,8 +45,9 @@ func _physics_process(_delta):
 
 func summon_random_enemy():
 	var enemy = summonables[randi() % summonables.size()]
-	enemy.position = global_position
-	summonables_parent.add_child(enemy)
+	var summoning_circle = summoning_circle_scene.instantiate()
+	summoning_circle.to_summon = enemy
+	summonables_parent.add_child(summoning_circle)
 
 
 func make_path():

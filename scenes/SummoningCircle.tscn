@@ -9,10 +9,14 @@ script = ExtResource("1_3hd8q")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_tm804")
 hframes = 2
+frame = 1
 
 [node name="SummonTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
 [node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="SummonTimer" to="." method="_on_summon_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
