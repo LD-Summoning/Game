@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var cast_timer = $CastTimer
 @onready var fireball_parent = get_parent().get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D
+var shader: ShaderMaterial
 
 var can_cast = true
 var active = false
@@ -22,6 +23,12 @@ enum AnimationState {
 }
 
 var animation_state = AnimationState.IDLE
+
+func _ready():
+	if animated_sprite2d != null:
+		shader = animated_sprite2d.material
+	else:
+		shader = sprite2d.material
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(_delta):
@@ -134,3 +141,13 @@ func _on_death():
 		if sprite2d != null:
 			sprite2d.frame = AnimationState.DYING
 		$DeathTimer.start()
+
+
+func _on_health_health_changed(from, to):
+	if from > to:
+		shader.set_shader_parameter("flash_red", true)
+		$RedFlashTimer.start()
+		
+
+func _on_red_flash_timer_timeout():
+	shader.set_shader_parameter("flash_red", false)

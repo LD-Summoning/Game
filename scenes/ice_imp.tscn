@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr54n4tv8h007"]
+[gd_scene load_steps=6 format=3 uid="uid://cr54n4tv8h007"]
 
 [ext_resource type="Texture2D" uid="uid://be64yd08d7fpf" path="res://enemy/ice_imp/ice_imp.png" id="1_iqb73"]
 [ext_resource type="PackedScene" uid="uid://bahiwly305vcs" path="res://scenes/caster.tscn" id="1_qybap"]
 [ext_resource type="PackedScene" uid="uid://3iql62g3vw3m" path="res://scenes/fireball.tscn" id="3_11kf1"]
+[ext_resource type="Shader" path="res://shader/damage_effect.gdshader" id="3_tmnwt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtbh1"]
+resource_local_to_scene = true
+shader = ExtResource("3_tmnwt")
+shader_parameter/flash_red = false
 
 [node name="IceImp" type="Node2D"]
 
@@ -11,6 +17,7 @@ projectile_scene = ExtResource("3_11kf1")
 sprite2d = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Imp"]
+material = SubResource("ShaderMaterial_qtbh1")
 texture = ExtResource("1_iqb73")
 hframes = 8
 vframes = 3

@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://hpc1asacwnb1"]
+[gd_scene load_steps=8 format=3 uid="uid://hpc1asacwnb1"]
 
 [ext_resource type="Texture2D" uid="uid://bryfn1onysuty" path="res://enemy/yeti/yeti_atlas.png" id="1_2x2g5"]
 [ext_resource type="Script" path="res://enemy/yeti/yeti.gd" id="1_das8c"]
+[ext_resource type="Shader" path="res://shader/damage_effect.gdshader" id="2_1c3qc"]
 [ext_resource type="Script" path="res://common/Health.gd" id="3_4gie0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cby5i"]
 radius = 5.0
 height = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5lfy"]
+resource_local_to_scene = true
+shader = ExtResource("2_1c3qc")
+shader_parameter/flash_red = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6n56"]
 size = Vector2(13, 21)
@@ -23,6 +29,7 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_cby5i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q5lfy")
 texture = ExtResource("1_2x2g5")
 hframes = 8
 vframes = 4
@@ -52,8 +59,14 @@ autostart = true
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="RedFlashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="RedFlashTimer" to="." method="_on_red_flash_timer_timeout"]

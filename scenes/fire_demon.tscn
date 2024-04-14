@@ -45,10 +45,16 @@ one_shot = true
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="RedFlashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
 [connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
 [connection signal="timeout" from="StartCastingTimer" to="." method="_on_start_casting_timer_timeout"]
 [connection signal="timeout" from="StartMovingTimer" to="." method="_on_start_moving_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="RedFlashTimer" to="." method="_on_red_flash_timer_timeout"]

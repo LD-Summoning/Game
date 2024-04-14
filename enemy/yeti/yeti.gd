@@ -86,3 +86,13 @@ func _on_animation_timer_timeout():
 
 func _on_death_timer_timeout():
 	queue_free()
+
+
+func _on_health_health_changed(from, to):
+	if from > to:
+		sprite.material.set_shader_parameter("flash_red", true)
+		$RedFlashTimer.start()
+		
+
+func _on_red_flash_timer_timeout():
+	sprite.material.set_shader_parameter("flash_red", false)
