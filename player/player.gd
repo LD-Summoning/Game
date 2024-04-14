@@ -184,12 +184,12 @@ func start_tentacle_slap():
 	is_preparing_slap = false
 	can_slap = false
 	_slap_cooldown_timer.start(tentacle_slap_cooldown)
-	var target_position = get_global_mouse_position()
-	_tentacle_circle_sprite.global_position = target_position
-	_tentacle_slap_timer.start(tentacle_slap_duration)
+	_tentacle_circle_sprite.visible = false
 	var slap_instance = _slap_scene.instantiate()
 	slap_instance.tentacle_slap_damage = tentacle_slap_damage
 	slap_instance.tentacle_slap_duration = tentacle_slap_duration
+	slap_instance.position = get_global_mouse_position()
+	_player_spells_parent.add_child(slap_instance)
 
 
 func _on_tentacle_slap_cooldown_timer_timeout():
