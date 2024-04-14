@@ -654,6 +654,11 @@ shape = SubResource("RectangleShape2D_cw1ci")
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_2wtud")
 
+[node name="FishSummonAnchor" type="Marker2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="CircleSprite" type="Sprite2D" parent="FishSummonAnchor"]
+
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="timeout" from="FishShotDelayTimer" to="." method="_on_fish_shot_delay_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
