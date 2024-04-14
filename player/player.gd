@@ -27,6 +27,7 @@ enum Direction{
 @export var attack_time = 0.3
 @export var attack_update_time = 0.025
 @export var swipe_angle = deg_to_rad(135)
+@export var melee_damage = 10
 
 
 @onready var _animation = $PlayerSprite
@@ -45,6 +46,7 @@ var can_roll = true
 var roll_direction_vector
 var attacking = false
 var can_attack = true
+var attack_hit_targets
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -69,6 +71,7 @@ func _ready():
 const attack_anchor_distance = 6
 func attack():
 	var attack_direction = Vector2.RIGHT.angle_to(get_local_mouse_position())
+	attack_hit_targets = []
 	_attack_timer.start(attack_time)
 	_attack_update_timer.start(attack_update_time)
 	_attack_cooldown_timer.start(attack_cooldown)
@@ -83,10 +86,19 @@ func _on_attack_update_timer_timeout():
 	_attack_anchor.rotation += swipe_angle * attack_update_time / attack_time
 
 
+func _on_attack_area_body_entered(body):
+	if attack_hit_targets.find(body) < 0:
+		attack_hit_targets.push_back(body)
+
+
 func stop_attack():
 	_attack_update_timer.stop()
 	_attack_anchor.visible = false
 	attacking = false
+	_attack_area.set_collision_mask_value(3, false)
+	for body in attack_hit_targets:
+		if body.has_node("Health"):
+			body.get_node("Health").signal_damage(melee_damage)
 
 
 func _on_attack_timer_timeout():
@@ -274,3 +286,4 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+

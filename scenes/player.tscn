@@ -640,6 +640,8 @@ one_shot = true
 visible = false
 
 [node name="AttackArea" type="Area2D" parent="AttackAnchor"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackAnchor/AttackArea"]
 position = Vector2(17, -1)
@@ -653,3 +655,4 @@ sprite_frames = SubResource("SpriteFrames_2wtud")
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackUpdateTimer" to="." method="_on_attack_update_timer_timeout"]
+[connection signal="body_entered" from="AttackAnchor/AttackArea" to="." method="_on_attack_area_body_entered"]
