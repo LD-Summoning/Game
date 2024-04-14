@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dudhjj1c24k6j"]
 
-[ext_resource type="Texture2D" uid="uid://cxuij5n4mhgd0" path="res://player/fish/fish.png" id="1_5kikp"]
 [ext_resource type="Script" path="res://common/projectile.gd" id="1_ypqtk"]
+[ext_resource type="Texture2D" uid="uid://b3m0dx8ncv66b" path="res://player/fish/Fish.png" id="2_ylhfy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vyo7"]
 size = Vector2(8, 8)
@@ -15,6 +15,6 @@ script = ExtResource("1_ypqtk")
 shape = SubResource("RectangleShape2D_0vyo7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_5kikp")
+texture = ExtResource("2_ylhfy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

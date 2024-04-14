@@ -129,7 +129,9 @@ func start_fish_cast():
 func shoot_fish():
 	var fish = _fish_scene.instantiate()
 	fish.position = position
-	fish.velocity = 10 * (get_global_mouse_position() - position).normalized()
+	var direction = (get_global_mouse_position() - position).normalized()
+	fish.velocity = 100 * direction
+	fish.rotation = direction.angle() + PI
 	_player_spells_parent.add_child(fish)
 	
 
@@ -219,6 +221,8 @@ func _on_roll_timer_timeout():
 	set_collision_mask_value(3, true)
 	set_collision_mask_value(4, true)
 	set_collision_layer_value(1, true)
+	if Input.is_action_pressed("fish_cast"):
+		start_fish_cast()
 
 
 func _on_roll_cooldown_timeout():
@@ -281,9 +285,9 @@ func _input(event):
 		if fish_channeling:
 			stop_fish_cast()
 		attack()
-	elif !fish_channeling and event.is_action_pressed("cast_spell"):
+	elif !fish_channeling and event.is_action_pressed("fish_cast"):
 		start_fish_cast()
-	elif fish_channeling and event.is_action_released("cast_spell"):
+	elif fish_channeling and event.is_action_released("fish_cast"):
 		stop_fish_cast()
 	match state:
 		AnimationStates.IDLE:
