@@ -653,6 +653,7 @@ shape = SubResource("RectangleShape2D_cw1ci")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackAnchor/AttackArea/AttackCollision"]
 sprite_frames = SubResource("SpriteFrames_2wtud")
 
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="timeout" from="FishShotDelayTimer" to="." method="_on_fish_shot_delay_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
 [connection signal="timeout" from="RollCooldownTimer" to="." method="_on_roll_cooldown_timeout"]

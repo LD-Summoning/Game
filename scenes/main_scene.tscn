@@ -14,7 +14,8 @@ shader_parameter/health = 1.0
 
 [node name="Level" parent="." instance=ExtResource("1_m0ma4")]
 
-[node name="Player" parent="." instance=ExtResource("2_vo3os")]
+[node name="Player" parent="." node_paths=PackedStringArray("water_bottle") instance=ExtResource("2_vo3os")]
+water_bottle = NodePath("../UI Layer/Control/WaterBottle")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false

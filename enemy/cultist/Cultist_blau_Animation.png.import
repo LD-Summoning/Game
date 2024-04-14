@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3m0dx8ncv66b"
-path="res://.godot/imported/fish.png-e33876f31c9c90bec865b21f7ca8e92b.ctex"
+uid="uid://dxykbwbv5oisg"
+path="res://.godot/imported/Cultist_blau_Animation.png-85c8b33f2e5a955e961de148c7717055.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/fish/fish.png"
-dest_files=["res://.godot/imported/fish.png-e33876f31c9c90bec865b21f7ca8e92b.ctex"]
+source_file="res://enemy/cultist/Cultist_blau_Animation.png"
+dest_files=["res://.godot/imported/Cultist_blau_Animation.png-85c8b33f2e5a955e961de148c7717055.ctex"]
 
 [params]
 

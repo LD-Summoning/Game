@@ -19,6 +19,8 @@ enum Direction{
 	UP_LEFT
 }
 
+@export var water_bottle: TextureRect
+@export var max_health:float = 100.0
 @export var speed = 90
 @export var roll_speed = 200
 @export var roll_time = 0.5
@@ -347,8 +349,6 @@ func _input(event):
 
 
 
-# Processing
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func _on_health_health_changed(from, to):
+	var health_f: float = to/max_health
+	water_bottle.material.set_shader_parameter("health", health_f)
