@@ -33,11 +33,10 @@ autostart = true
 script = ExtResource("2_ep3dq")
 
 [node name="AnimationTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.125
 autostart = true
 
 [node name="DeathTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]

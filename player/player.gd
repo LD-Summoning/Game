@@ -97,7 +97,7 @@ func stop_attack():
 	attacking = false
 	_attack_area.set_collision_mask_value(3, false)
 	for body in attack_hit_targets:
-		if body.has_node("Health"):
+		if body != null && body.has_node("Health"):
 			body.get_node("Health").signal_damage(melee_damage)
 	attack_hit_targets = []
 

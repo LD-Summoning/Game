@@ -92,12 +92,15 @@ func _on_pathfinding_timer_timeout():
 
 
 func _on_animation_timer_timeout():
+	if animation_state == AnimationState.DYING && sprite2d.frame == animation_state + 7:
+		return # Leave enemy in last dying frame if not dead yet
 	var start_frame: int = animation_state
-	sprite2d.frame += 1
-	if sprite2d.frame >= start_frame + 8:
-		sprite2d.frame = start_frame
-	elif sprite2d.frame < start_frame:
-		sprite2d.frame = start_frame
+	var new_frame = sprite2d.frame + 1
+	if new_frame >= start_frame + 8:
+		new_frame = start_frame
+	elif new_frame < start_frame:
+		new_frame = start_frame
+	sprite2d.frame = new_frame
 
 
 func _on_start_casting_timer_timeout():
@@ -111,8 +114,10 @@ func _on_start_moving_timer_timeout():
 
 
 func _on_health_death():
-	animation_state = AnimationState.DYING
-	$DeathTimer.start()
+	if animation_state != AnimationState.DYING:
+		animation_state = AnimationState.DYING
+		sprite2d.frame = AnimationState.DYING
+		$DeathTimer.start()
 
 
 func _on_death_timer_timeout():

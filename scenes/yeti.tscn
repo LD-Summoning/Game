@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://hpc1asacwnb1"]
+[gd_scene load_steps=6 format=3 uid="uid://hpc1asacwnb1"]
 
 [ext_resource type="Texture2D" uid="uid://bryfn1onysuty" path="res://enemy/yeti/yeti_atlas.png" id="1_2x2g5"]
 [ext_resource type="Script" path="res://enemy/yeti/yeti.gd" id="1_das8c"]
+[ext_resource type="Script" path="res://common/Health.gd" id="3_4gie0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cby5i"]
 radius = 5.0
@@ -23,7 +24,8 @@ shape = SubResource("CapsuleShape2D_cby5i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2x2g5")
-hframes = 2
+hframes = 8
+vframes = 4
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
@@ -40,5 +42,18 @@ shape = SubResource("RectangleShape2D_k6n56")
 wait_time = 0.1
 autostart = true
 
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_4gie0")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.125
+autostart = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
