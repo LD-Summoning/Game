@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://3iql62g3vw3m"]
 
 [ext_resource type="Texture2D" uid="uid://cab546vm3aqjx" path="res://enemy/fireball/fireball.png" id="1_3qka6"]
-[ext_resource type="Script" path="res://enemy/fireball/fireball.gd" id="1_xwl2a"]
+[ext_resource type="Script" path="res://enemy/projectile.gd" id="1_t0hkj"]
 [ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="3_0h85g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhq8y"]
@@ -10,7 +10,7 @@ size = Vector2(7, 8)
 [node name="Fireball" type="Area2D"]
 collision_layer = 8
 collision_mask = 3
-script = ExtResource("1_xwl2a")
+script = ExtResource("1_t0hkj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3qka6")

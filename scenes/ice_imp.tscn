@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://cr54n4tv8h007"]
 
 [ext_resource type="Texture2D" uid="uid://be64yd08d7fpf" path="res://enemy/ice_imp/ice_imp.png" id="1_iqb73"]
-[ext_resource type="PackedScene" uid="uid://bahiwly305vcs" path="res://scenes/caster.tscn" id="2_muki2"]
+[ext_resource type="PackedScene" uid="uid://bahiwly305vcs" path="res://scenes/caster.tscn" id="1_qybap"]
 [ext_resource type="PackedScene" uid="uid://3iql62g3vw3m" path="res://scenes/fireball.tscn" id="3_11kf1"]
 
 [node name="IceImp" type="Node2D"]
 
-[node name="Imp" parent="." node_paths=PackedStringArray("sprite2d") instance=ExtResource("2_muki2")]
+[node name="Imp" parent="." node_paths=PackedStringArray("sprite2d") instance=ExtResource("1_qybap")]
 projectile_scene = ExtResource("3_11kf1")
 sprite2d = NodePath("Sprite2D")
 
