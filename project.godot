@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="LDGameJam"
+config/name="Octopus"
+config/version="FINAL FINAL v2 really FINAL !!!"
 run/main_scene="res://scenes/main_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Icon.png"
 
 [display]
 

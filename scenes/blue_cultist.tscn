@@ -297,4 +297,4 @@ animated_sprite2d = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Caster"]
 sprite_frames = SubResource("SpriteFrames_7rt41")
-animation = &"idle_left"
+animation = &"dying_right"

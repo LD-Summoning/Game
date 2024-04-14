@@ -69,7 +69,7 @@ func _on_health_death():
 		animation_state = AnimationState.DYING
 		sprite.frame = AnimationState.DYING
 		$DeathTimer.start()
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.set_deferred("disabled", true)
 
 
 func _on_animation_timer_timeout():
