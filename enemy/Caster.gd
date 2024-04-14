@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 50
 @export var projectile_scene: PackedScene
 @export var sprite2d: Sprite2D
+@export var animated_sprite2d: AnimatedSprite2D
 
 @onready var player = get_parent().get_parent().get_parent().get_parent().get_node("Player")
 @onready var cast_timer = $CastTimer
@@ -12,6 +13,7 @@ extends CharacterBody2D
 
 var can_cast = true
 var active = false
+var moving_left = false
 
 enum AnimationState {
 	IDLE = 0,
@@ -35,6 +37,7 @@ func _physics_process(_delta):
 			cast_timer.start()
 			cast_fireball()
 			can_cast = false
+	moving_left = velocity.x < 0
 	move_and_slide()
 
 
@@ -45,7 +48,6 @@ func cast_fireball():
 	
 	fireball.velocity = direction * 300
 	fireball_parent.add_child(fireball)
-	print("FIREBALL")
 
 
 func make_path():
@@ -84,6 +86,13 @@ func _on_pathfinding_timer_timeout():
 
 
 func _on_animation_timer_timeout():
+	if sprite2d != null:
+		animate_sprite_frames()
+	else:
+		animate_with_animations()
+
+
+func animate_sprite_frames():
 	if animation_state == AnimationState.DYING && sprite2d.frame == animation_state + 7:
 		return # Leave enemy in last dying frame if not dead yet
 	var start_frame: int = animation_state
@@ -95,12 +104,33 @@ func _on_animation_timer_timeout():
 	sprite2d.frame = new_frame
 
 
+func animate_with_animations():
+	var animation_name = ""
+	match animation_state:
+		AnimationState.IDLE:
+			animation_name = "idle"
+		AnimationState.MOVING:
+			animation_name = "moving"
+		AnimationState.DYING:
+			animation_name = "dying"
+	
+	if moving_left:
+		animation_name += "_left"
+	else:
+		animation_name += "_right"
+	
+	if animated_sprite2d.animation != animation_name:
+		animated_sprite2d.play(animation_name)
+
+
 func _on_death_timer_timeout():
 	queue_free()
 
 
 func _on_death():
 	if animation_state != AnimationState.DYING:
+		$CollisionShape2D.disabled = true
 		animation_state = AnimationState.DYING
-		sprite2d.frame = AnimationState.DYING
+		if sprite2d != null:
+			sprite2d.frame = AnimationState.DYING
 		$DeathTimer.start()
