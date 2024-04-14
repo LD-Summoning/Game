@@ -70,6 +70,7 @@ cast_spell={
 2d_physics/layer_2="Environment"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="EnemyCasts"
+2d_physics/layer_5="Tür"
 
 [navigation]
 

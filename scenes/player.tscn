@@ -599,6 +599,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 17
 collision_mask = 15
 script = ExtResource("1_pu3yh")
 roll_cooldown = 0.7

@@ -220,7 +220,8 @@ func _input(event):
 	if rolling:
 		return
 	elif event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
-		stop_attack()
+		if attacking:
+			stop_attack()
 		roll()
 		return
 	elif can_attack and !attacking and event.is_action_pressed("attack"):
