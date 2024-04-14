@@ -33,6 +33,7 @@ script = ExtResource("3_2kmki")
 [node name="CastedSpells" type="Node" parent="Enemies"]
 
 [node name="Boss" parent="Enemies" instance=ExtResource("4_r6jnt")]
+position = Vector2(101, 105)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")

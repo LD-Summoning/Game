@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var sprite2d: Sprite2D
 @export var animated_sprite2d: AnimatedSprite2D
 
-@onready var player = get_parent().get_parent().get_parent().get_parent().get_node("Player")
+@onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var cast_timer = $CastTimer
 @onready var fireball_parent = get_parent().get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D

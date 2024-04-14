@@ -71,7 +71,8 @@ navigation_polygon = SubResource("NavigationPolygon_wn2wp")
 
 [node name="Door" type="Area2D" parent="." groups=["doors"]]
 position = Vector2(666, 59)
-collision_layer = 2
+collision_layer = 16
+collision_mask = 17
 script = ExtResource("9_m66js")
 scene = ExtResource("10_axc73")
 

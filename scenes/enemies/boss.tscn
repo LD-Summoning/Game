@@ -36,6 +36,8 @@ material = SubResource("ShaderMaterial_pj7jt")
 sprite_frames = SubResource("SpriteFrames_pluh2")
 
 [node name="CastTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

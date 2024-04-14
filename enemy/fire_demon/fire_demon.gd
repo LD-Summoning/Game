@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var speed = 50
 
-@onready var player = get_parent().get_parent().get_parent().get_node("Player")
+@onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var cast_timer = $CastTimer
 @onready var burning_area_scene = preload("res://scenes/BurningArea.tscn")
 @onready var burning_area_parent = get_parent().get_node("CastedSpells")

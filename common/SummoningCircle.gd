@@ -6,8 +6,8 @@ extends Node2D
 func _on_summon_timer_timeout():
 	$DeathTimer.start()
 	var summoned = to_summon.instantiate()
-	summoned.position = position
-	get_parent().add_child(summoned)
+	summoned.position = global_position
+	get_parent().get_parent().add_child(summoned)
 
 
 func _on_death_timer_timeout():

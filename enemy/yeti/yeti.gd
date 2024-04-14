@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var speed = 125
 @export var damage = 10
 
-@onready var player = get_parent().get_parent().get_parent().get_node("Player")
+@onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var agent = $NavigationAgent2D
 @onready var sprite = $Sprite2D
 @onready var attack_timer = $AttackTimer

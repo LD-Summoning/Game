@@ -5,9 +5,9 @@ extends CharacterBody2D
 @export var animated_sprite2d: AnimatedSprite2D
 @export var summonables: Array[PackedScene]
 
-@onready var player = get_parent().get_parent().get_parent().get_parent().get_node("Player")
+@onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var cast_timer = $CastTimer
-@onready var summonables_parent = get_parent().get_parent().get_node("CastedSpells")
+@onready var summonables_parent = get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D
 @onready var shader = animated_sprite2d.material
 @onready var summoning_circle_scene = preload("res://scenes/SummoningCircle.tscn")
@@ -47,6 +47,7 @@ func summon_random_enemy():
 	var enemy = summonables[randi() % summonables.size()]
 	var summoning_circle = summoning_circle_scene.instantiate()
 	summoning_circle.to_summon = enemy
+	summoning_circle.position = global_position
 	summonables_parent.add_child(summoning_circle)
 
 
