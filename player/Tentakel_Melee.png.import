@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcnyp7n4ktva"
-path="res://.godot/imported/staff_primitive.png-7d9d36f8ddd952945c64ae97b0021eef.ctex"
+uid="uid://cwmy4jx62722a"
+path="res://.godot/imported/Tentakel_Melee.png-bd6afba7f28d1c5048cf50fc7be3567d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/staff_primitive.png"
-dest_files=["res://.godot/imported/staff_primitive.png-7d9d36f8ddd952945c64ae97b0021eef.ctex"]
+source_file="res://player/Tentakel_Melee.png"
+dest_files=["res://.godot/imported/Tentakel_Melee.png-bd6afba7f28d1c5048cf50fc7be3567d.ctex"]
 
 [params]
 

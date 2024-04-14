@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://player/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://mq7b8xjxsghq" path="res://player/Oktopus_Animation.png" id="2_xvn55"]
 [ext_resource type="Script" path="res://common/Health.gd" id="4_o31k1"]
-[ext_resource type="Texture2D" uid="uid://dcnyp7n4ktva" path="res://player/staff_primitive.png" id="5_mrgge"]
+[ext_resource type="Texture2D" uid="uid://cwmy4jx62722a" path="res://player/Tentakel_Melee.png" id="5_ig46o"]
 [ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="5_qrj7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hoi"]
@@ -583,15 +583,15 @@ func _process(delta):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cw1ci"]
 size = Vector2(16, 6)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jcdyn"]
-atlas = ExtResource("5_mrgge")
-region = Rect2(0, 0, 16, 6)
+[sub_resource type="AtlasTexture" id="AtlasTexture_83ri2"]
+atlas = ExtResource("5_ig46o")
+region = Rect2(0, 0, 6, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2wtud"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jcdyn")
+"texture": SubResource("AtlasTexture_83ri2")
 }],
 "loop": true,
 "name": &"default",
@@ -647,10 +647,11 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackAnchor/AttackArea"]
-position = Vector2(17, -1)
+position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_cw1ci")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackAnchor/AttackArea/AttackCollision"]
+rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_2wtud")
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]

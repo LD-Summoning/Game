@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3m0dx8ncv66b"
-path="res://.godot/imported/Fish.png-5cd35ec10a1d2f2b5f22dc5c709b9e2a.ctex"
+uid="uid://d3hlemcbfpx6p"
+path="res://.godot/imported/Summoning_Circles.png-7498f07d89cb860baa3977e0eb8754c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/fish/Fish.png"
-dest_files=["res://.godot/imported/Fish.png-5cd35ec10a1d2f2b5f22dc5c709b9e2a.ctex"]
+source_file="res://common/Summoning_Circles.png"
+dest_files=["res://.godot/imported/Summoning_Circles.png-7498f07d89cb860baa3977e0eb8754c9.ctex"]
 
 [params]
 
