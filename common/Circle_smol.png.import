@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3hlemcbfpx6p"
-path="res://.godot/imported/Summoning_Circles.png-7498f07d89cb860baa3977e0eb8754c9.ctex"
+uid="uid://i50ic1nkae7m"
+path="res://.godot/imported/Circle_smol.png-4be78b75bc389de072061f1b1699219b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/Summoning_Circles.png"
-dest_files=["res://.godot/imported/Summoning_Circles.png-7498f07d89cb860baa3977e0eb8754c9.ctex"]
+source_file="res://common/Circle_smol.png"
+dest_files=["res://.godot/imported/Circle_smol.png-4be78b75bc389de072061f1b1699219b.ctex"]
 
 [params]
 

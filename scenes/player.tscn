@@ -1,10 +1,11 @@
-[gd_scene load_steps=86 format=3 uid="uid://bqnmlnjkhs2tk"]
+[gd_scene load_steps=87 format=3 uid="uid://bqnmlnjkhs2tk"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pu3yh"]
 [ext_resource type="Texture2D" uid="uid://mq7b8xjxsghq" path="res://player/Oktopus_Animation.png" id="2_xvn55"]
 [ext_resource type="Script" path="res://common/Health.gd" id="4_o31k1"]
 [ext_resource type="Texture2D" uid="uid://cwmy4jx62722a" path="res://player/Tentakel_Melee.png" id="5_ig46o"]
 [ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="5_qrj7x"]
+[ext_resource type="Texture2D" uid="uid://i50ic1nkae7m" path="res://common/Circle_smol.png" id="6_g671e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hoi"]
 size = Vector2(16, 15)
@@ -655,9 +656,12 @@ rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_2wtud")
 
 [node name="FishSummonAnchor" type="Marker2D" parent="."]
-position = Vector2(8, 0)
+visible = false
 
 [node name="CircleSprite" type="Sprite2D" parent="FishSummonAnchor"]
+position = Vector2(14, 0)
+rotation = 1.5708
+texture = ExtResource("6_g671e")
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="timeout" from="FishShotDelayTimer" to="." method="_on_fish_shot_delay_timeout"]

@@ -45,6 +45,7 @@ enum Direction{
 @onready var _fish_shot_delay_timer = $FishShotDelayTimer
 @onready var _fish_scene = preload("res://scenes/fish.tscn")
 @onready var _player_spells_parent = get_parent().get_node("PlayerCasts")
+@onready var _fish_summon_circle_anchor = $FishSummonAnchor
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
@@ -72,6 +73,10 @@ func _ready():
 	_animation.play("idle")
 
 
+func _process(delta):
+	_fish_summon_circle_anchor.rotation = Vector2.RIGHT.angle_to(get_local_mouse_position())
+
+
 # Attacking
 
 
@@ -95,6 +100,8 @@ func _on_attack_update_timer_timeout():
 func _on_attack_area_body_entered(body):
 	if attack_hit_targets.find(body) < 0:
 		attack_hit_targets.push_back(body)
+		if body != null && body.has_node("Health"):
+			body.get_node("Health").signal_damage(melee_damage)
 
 
 func stop_attack():
@@ -102,9 +109,6 @@ func stop_attack():
 	_attack_anchor.visible = false
 	attacking = false
 	_attack_area.set_collision_mask_value(3, false)
-	for body in attack_hit_targets:
-		if body != null && body.has_node("Health"):
-			body.get_node("Health").signal_damage(melee_damage)
 	attack_hit_targets = []
 
 
@@ -124,13 +128,14 @@ func _on_attack_cooldown_timer_timeout():
 
 func start_fish_cast():
 	fish_channeling = true
+	_fish_summon_circle_anchor.visible = true
 	_fish_shot_delay_timer.start(fish_spawn_delay)
 	
 
 
 func shoot_fish():
 	var fish = _fish_scene.instantiate()
-	fish.position = position
+	fish.position = _fish_summon_circle_anchor.get_node("CircleSprite").global_position
 	var direction = (get_global_mouse_position() - position).normalized()
 	fish.velocity = 100 * direction
 	fish.rotation = direction.angle() + PI
@@ -143,6 +148,7 @@ func _on_fish_shot_delay_timeout():
 
 func stop_fish_cast():
 	_fish_shot_delay_timer.stop()
+	_fish_summon_circle_anchor.visible = false
 	fish_channeling = false
 
 
