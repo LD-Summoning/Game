@@ -26,9 +26,9 @@ script = ExtResource("3_edjhe")
 [node name="LevelSwitchCooldown" type="Timer" parent="LevelSwitcher"]
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI Layer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="UI Layer"]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -39,7 +39,7 @@ grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="WaterBottle" type="TextureRect" parent="UI Layer/Control"]
 material = SubResource("ShaderMaterial_0e4ix")
 layout_mode = 0
 offset_right = 40.0

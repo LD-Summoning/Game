@@ -10,6 +10,7 @@ func _process(delta):
 
 
 func _on_body_entered(body):
+	print(body)
 	if body.has_node("Health"):
 		body.get_node("Health").signal_damage(damage)
-	queue_free()
+	# queue_free()

@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 
 @export var speed = 50
+@export var projectile_scene: PackedScene
+@export var sprite2d: Sprite2D
 
-@onready var player = get_parent().get_parent().get_parent().get_node("Player")
+@onready var player = get_parent().get_parent().get_parent().get_parent().get_node("Player")
 @onready var cast_timer = $CastTimer
-@onready var fireball_scene = preload("res://scenes/fireball.tscn")
-@onready var fireball_parent = get_parent().get_node("CastedSpells")
+@onready var fireball_parent = get_parent().get_parent().get_node("CastedSpells")
 @onready var agent = $NavigationAgent2D
-@onready var sprite2d = $Sprite2D
 
 var can_cast = true
 var active = false
@@ -39,12 +39,13 @@ func _physics_process(_delta):
 
 
 func cast_fireball():
-	var fireball = fireball_scene.instantiate()
-	fireball.position = position
-	var direction = (player.position + player.velocity * 0.5 - position).normalized()
+	var fireball = projectile_scene.instantiate()
+	fireball.position = global_position
+	var direction = (player.position + player.velocity * 0.5 - global_position).normalized()
 	
 	fireball.velocity = direction * 300
 	fireball_parent.add_child(fireball)
+	print("FIREBALL")
 
 
 func make_path():
@@ -52,7 +53,7 @@ func make_path():
 	var target_position
 	if can_see_player():
 		
-		var direction_to_player = (player_position - position).normalized()
+		var direction_to_player = (player_position - global_position).normalized()
 		direction_to_player *= 100
 		target_position = player_position - direction_to_player
 		target_position = target_position
@@ -98,7 +99,7 @@ func _on_death_timer_timeout():
 	queue_free()
 
 
-func _on_health_death():
+func _on_death():
 	if animation_state != AnimationState.DYING:
 		animation_state = AnimationState.DYING
 		sprite2d.frame = AnimationState.DYING
