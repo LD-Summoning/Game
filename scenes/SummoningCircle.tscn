@@ -9,7 +9,6 @@ script = ExtResource("1_3hd8q")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_tm804")
 hframes = 2
-frame = 1
 
 [node name="SummonTimer" type="Timer" parent="."]
 one_shot = true
