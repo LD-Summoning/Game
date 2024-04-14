@@ -590,7 +590,7 @@ shape = SubResource("RectangleShape2D_07hoi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k722i")
-animation = &"rolling_up"
+animation = &"rolling_down"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_o31k1")
@@ -608,6 +608,8 @@ script = SubResource("GDScript_4q8am")
 
 [node name="RollCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
 [connection signal="timeout" from="RollCooldown" to="." method="_on_roll_cooldown_timeout"]

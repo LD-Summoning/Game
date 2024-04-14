@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://player/PlayerStartPos.gd" id="3_j0txl"]
 [ext_resource type="PackedScene" uid="uid://b0gwjrkr0mtl4" path="res://scenes/fire_imp.tscn" id="3_po6s7"]
 [ext_resource type="PackedScene" uid="uid://btbk41nxhucgu" path="res://scenes/fire_demon.tscn" id="5_q0bhd"]
-[ext_resource type="PackedScene" uid="uid://hpc1asacwnb1" path="res://scenes/yeti.tscn" id="6_yagl5"]
-[ext_resource type="PackedScene" uid="uid://cr54n4tv8h007" path="res://scenes/ice_imp.tscn" id="7_yvo6s"]
+[ext_resource type="PackedScene" path="res://scenes/yeti.tscn" id="6_yagl5"]
+[ext_resource type="PackedScene" path="res://scenes/ice_imp.tscn" id="7_yvo6s"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bpko7"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)

@@ -23,11 +23,13 @@ enum Direction{
 @export var roll_speed = 200
 @export var roll_time = 0.5
 @export var roll_cooldown = 0.8
+@export var attack_cooldown = 0.5
 
 @onready var _animation = $AnimatedSprite2D
 @onready var _health = $Health
 @onready var _roll_timer = $RollTimer
 @onready var _roll_cooldown_timer = $RollCooldown
+@onready var _attack_cooldown_timer = $AttackCooldownTimer
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
@@ -50,6 +52,10 @@ func _ready():
 	_animation.play("idle")
 
 
+func attack():
+	var attack_direction = get_local_mouse_position()
+
+
 func roll_direction_map(roll_direction: Direction) -> StringName:
 	match roll_direction:
 		Direction.UP: return "rolling_up"
@@ -57,6 +63,8 @@ func roll_direction_map(roll_direction: Direction) -> StringName:
 		Direction.LEFT, Direction.UP_LEFT, Direction.DOWN_LEFT: return "rolling_left"
 		Direction.RIGHT, Direction.DOWN_RIGHT, Direction. UP_RIGHT: return "rolling_right"
 	return "rolling_left"
+	
+	
 
 func get_move_direction() -> Direction:
 	if Input.is_action_pressed("up"):
