@@ -50,7 +50,6 @@ enum Direction{
 @onready var _player_spells_parent = get_parent().get_node("PlayerCasts")
 @onready var _fish_summon_circle_anchor = $FishSummonAnchor
 @onready var _tentacle_circle_sprite = $TentacleSlapCircle
-@onready var _tentacle_slap_timer = $TentacleSlapTimer
 @onready var _slap_cooldown_timer = $TentacleSlapCooldownTimer
 @onready var _slap_scene = preload("res://player/tentacle_slap.tscn")
 
