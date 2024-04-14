@@ -1,6 +1,8 @@
 extends Node2D
 
+# Scene to spawn when 
 @export var scene_to_spawn: PackedScene
+# 
 @export var distance: int = 300
 
 
