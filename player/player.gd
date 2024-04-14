@@ -42,6 +42,7 @@ enum Direction{
 @onready var _attack_area = $AttackAnchor/AttackArea
 @onready var _fish_shot_delay_timer = $FishShotDelayTimer
 @onready var _fish_scene = preload("res://scenes/fish.tscn")
+@onready var _player_spells_parent = get_parent().get_node("PlayerCasts")
 
 var state: AnimationStates = AnimationStates.IDLE
 var rolling = false
@@ -128,7 +129,8 @@ func start_fish_cast():
 func shoot_fish():
 	var fish = _fish_scene.instantiate()
 	fish.position = position
-	fish.velocity = 100 * (get_local_mouse_position() - position)
+	fish.velocity = 10 * (get_global_mouse_position() - position).normalized()
+	_player_spells_parent.add_child(fish)
 	
 
 func _on_fish_shot_delay_timeout():

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dudhjj1c24k6j"]
 
 [ext_resource type="Texture2D" uid="uid://cxuij5n4mhgd0" path="res://player/fish/fish.png" id="1_5kikp"]
-[ext_resource type="Script" path="res://enemy/fireball/fireball.gd" id="1_quvfb"]
+[ext_resource type="Script" path="res://common/projectile.gd" id="1_ypqtk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vyo7"]
 size = Vector2(8, 8)
@@ -9,7 +9,7 @@ size = Vector2(8, 8)
 [node name="fish" type="Area2D"]
 collision_layer = 0
 collision_mask = 6
-script = ExtResource("1_quvfb")
+script = ExtResource("1_ypqtk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0vyo7")
