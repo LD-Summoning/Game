@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var speed = 50
 @export var projectile_scene: PackedScene
+@export var projectile_speed = 300
 @export var sprite2d: Sprite2D
 @export var animated_sprite2d: AnimatedSprite2D
 @export var max_health = 100
@@ -55,7 +56,7 @@ func cast_fireball():
 	fireball.position = global_position
 	var direction = (player.position + player.velocity * 0.5 - global_position).normalized()
 	
-	fireball.velocity = direction * 300
+	fireball.velocity = direction * projectile_speed
 	fireball_parent.add_child(fireball)
 
 

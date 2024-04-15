@@ -5,3 +5,4 @@ extends Node2D
 func _ready():
 	var player = get_tree().get_nodes_in_group("player")[0]
 	player.position = position
+	player.get_node("Health")._health = player.max_health
