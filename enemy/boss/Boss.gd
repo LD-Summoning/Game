@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var animated_sprite2d: AnimatedSprite2D
 @export var summonables: Array[PackedScene]
 @export var thumbnails: Array[Texture2D]
+@export var boss_bar: TextureProgressBar
 
 @onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var cast_timer = $CastTimer
@@ -16,15 +17,24 @@ extends CharacterBody2D
 var can_summon = true
 var active = false
 var moving_left = false
+var moving_y = false
 
 enum AnimationState {
-	IDLE = 0,
-	MOVING = 8,
-	DYING = 16
+	IDLE,
+	MOVING,
+	ATTACKING,
+	MASK_OFF,
+	DYING,
 }
+
+const animation_to_name = ["idle", "moving", "attacking", "mask_off", "dying"]
 
 var animation_state = AnimationState.IDLE
 
+
+func _ready():
+	boss_bar.max_value = $Health._health
+	boss_bar.value = $Health._health
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(_delta):
@@ -35,12 +45,17 @@ func _physics_process(_delta):
 			var next_path_pos = agent.get_next_path_position()
 			var direction = global_position.direction_to(next_path_pos)
 			velocity = direction * speed
-			animation_state = AnimationState.MOVING
+			if animation_state == AnimationState.IDLE:
+				animation_state = AnimationState.MOVING
 		if can_summon && can_see_player():
 			cast_timer.start()
 			summon_random_enemy()
+			animation_state = AnimationState.ATTACKING
 			can_summon = false
 	moving_left = velocity.x < 0
+	moving_y = abs(velocity.x) < abs(velocity.y)
+	if velocity == Vector2.ZERO && animation_state == AnimationState.MOVING:
+		animation_state = AnimationState.IDLE
 	move_and_slide()
 
 
@@ -84,10 +99,13 @@ func can_see_player() -> bool:
 
 func _on_cast_timer_timeout():
 	can_summon = true
+	if animation_state == AnimationState.ATTACKING:
+		animation_state = AnimationState.IDLE
 
 
 func _on_pathfinding_timer_timeout():
-	make_path()
+	if animation_state != AnimationState.DYING:
+		make_path()
 
 
 func _on_animation_timer_timeout():
@@ -95,19 +113,15 @@ func _on_animation_timer_timeout():
 
 
 func animate_with_animations():
-	var animation_name = ""
-	match animation_state:
-		AnimationState.IDLE:
-			animation_name = "idle"
-		AnimationState.MOVING:
-			animation_name = "moving"
-		AnimationState.DYING:
-			animation_name = "dying"
+	var animation_name = animation_to_name[animation_state]
 	
-	if moving_left:
-		animation_name += "_left"
-	else:
-		animation_name += "_right"
+	if animation_state == AnimationState.MOVING:
+		if moving_y:
+			animation_name += "_y"
+		elif moving_left:
+			animation_name += "_left"
+		else:
+			animation_name += "_right"
 	
 	if animated_sprite2d.animation != animation_name:
 		animated_sprite2d.play(animation_name)
@@ -122,13 +136,14 @@ func _on_death():
 		$CollisionShape2D.set_deferred("disabled", true)
 		animation_state = AnimationState.DYING
 		$DeathTimer.start()
+		boss_bar.hide()
 
 
 func _on_health_health_changed(from, to):
 	if from > to:
 		shader.set_shader_parameter("flash_red", true)
 		$RedFlashTimer.start()
-		
+	boss_bar.value = to
 
 func _on_red_flash_timer_timeout():
 	shader.set_shader_parameter("flash_red", false)
