@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://sq08bkrhimyj"]
+[gd_scene load_steps=11 format=3 uid="uid://d2jvbg788b3ys"]
 
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_dh86g"]
 [ext_resource type="TileSet" uid="uid://cfga83ddv1htv" path="res://background/tileset.tres" id="2_d3syn"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bc7rbmkkhpd31" path="res://levels/spawner.tscn" id="4_keu2y"]
 [ext_resource type="PackedScene" uid="uid://b0gwjrkr0mtl4" path="res://scenes/enemies/fire_imp.tscn" id="5_m3e1t"]
 [ext_resource type="PackedScene" uid="uid://cr54n4tv8h007" path="res://scenes/enemies/ice_imp.tscn" id="6_wdqh5"]
+[ext_resource type="Script" path="res://levels/Door.gd" id="7_dkarf"]
+[ext_resource type="PackedScene" path="res://levels/Level_4.tscn" id="8_hrjdc"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wn2wp"]
 vertices = PackedVector2Array(110, 383, 92, 383, 92, 301, 110, 301, 220, 141, 220, 95, 254, 111, 254, 239, 204, 239, 204, 175, 174, 141, 188, 159, 526, -179, 590, -179, 590, -81, 572, -97, 572, -81, 478, -97, 508, -179, 478, -67, 526, -67, 526, -60, 534, -60, 534, -51, 590, -51, 590, 143, 556, 31, 556, 61, 444, 143, 444, 111, 476, 77, 174, 95, 46, 159, 28, 141, 28, 103, 20, 103, 20, 95, 254, 61, 188, 175, 46, 189, 158, 189, 158, 205, 110, 239, 92, 239, 28, 221, 174, 205, 174, 239, 110, 271, 92, 271, 12, 239, 12, 221, 28, 175, -18, 141, -18, 175, -18, 239, -52, 239, -52, 61, -18, 95, 254, 93, 444, 93, 444, 77, 476, 61, 508, -291, 526, -291, 444, -179, 444, 31)
@@ -14,6 +16,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-91, -56, 400, -55, 403
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 agent_radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ue4of"]
+size = Vector2(30, 15)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_dh86g")
@@ -50,3 +55,12 @@ scene_to_spawn = ExtResource("5_m3e1t")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")
+
+[node name="Area2D" type="Area2D" parent="." groups=["doors"]]
+collision_layer = 18
+script = ExtResource("7_dkarf")
+scene = ExtResource("8_hrjdc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(518, -209.5)
+shape = SubResource("RectangleShape2D_ue4of")
