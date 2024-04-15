@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bpueca0irmred"]
+[gd_scene load_steps=12 format=3 uid="uid://bpueca0irmred"]
 
 [ext_resource type="Script" path="res://common/projectile.gd" id="1_qcsth"]
 [ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="2_jfkl6"]
+[ext_resource type="AudioStream" uid="uid://dkv1dhfmngjmw" path="res://enemy/snowball/Eisball_fertig.ogg" id="2_kcg4h"]
 [ext_resource type="Texture2D" uid="uid://bt5yyf00esv32" path="res://enemy/snowball/Schneeball-Sheet.png" id="3_3wok2"]
+[ext_resource type="AudioStream" uid="uid://d3eqmf0ftwikm" path="res://common/Projektil_fertig.ogg" id="4_yfmdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhq8y"]
 size = Vector2(7, 8)
@@ -47,6 +49,7 @@ animations = [{
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_qcsth")
+impact_audio_stream = ExtResource("2_kcg4h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
@@ -62,5 +65,8 @@ texture = ExtResource("2_jfkl6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_45lmq")
 autoplay = "default"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_yfmdu")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

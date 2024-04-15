@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var _slap_timer = $SlapTimer
 @onready var _slap_animation = $SlapTentacle
+@onready var _audio_player = $AudioStreamPlayer2D
 
 var slap_hit_targets = []
 var tentacle_slap_damage = 0
@@ -11,6 +12,7 @@ var tentacle_slap_duration = 1
 func _ready():
 	_slap_timer.start(tentacle_slap_duration)
 	_slap_animation.play("default")
+	_audio_player.play()
 
 
 func _on_body_entered(body):

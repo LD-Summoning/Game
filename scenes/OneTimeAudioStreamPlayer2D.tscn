@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbe0lxmnnvitu"]
+
+[ext_resource type="Script" path="res://common/OneTimeAudioStreamPlayer2D.gd" id="1_jvguj"]
+
+[node name="OneTimeAudioStreamPlayer2d" type="AudioStreamPlayer2D"]
+script = ExtResource("1_jvguj")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

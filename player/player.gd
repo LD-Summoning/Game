@@ -8,6 +8,7 @@ enum AnimationStates {
 	IDLE
 }
 
+
 enum Direction{
 	UP,
 	UP_RIGHT,
@@ -18,6 +19,7 @@ enum Direction{
 	LEFT,
 	UP_LEFT
 }
+
 
 @export var water_bottle: TextureRect
 @export var max_health:float = 100.0
@@ -34,6 +36,9 @@ enum Direction{
 @export var tentacle_slap_cooldown = 5
 @export var tentacle_slap_damage = 30
 @export var tentacle_slap_duration = 1
+@export var meele_sound: AudioStream
+@export var roll_sound: AudioStream
+@export var fish_sound: AudioStream
 
 
 @onready var _animation = $PlayerSprite
@@ -51,7 +56,8 @@ enum Direction{
 @onready var _fish_summon_circle_anchor = $FishSummonAnchor
 @onready var _tentacle_circle_sprite = $TentacleSlapCircle
 @onready var _slap_cooldown_timer = $TentacleSlapCooldownTimer
-@onready var _slap_scene = preload("res://player/tentacle_slap.tscn")
+@onready var _slap_scene = preload("res://scenes/tentacle_slap.tscn")
+@onready var _general_audio_player = $AudioStreamPlayer2D
 
 
 var state: AnimationStates = AnimationStates.IDLE
@@ -102,6 +108,9 @@ func attack():
 	_attack_cooldown_timer.start(attack_cooldown)
 	attacking = true
 	can_attack = false
+	_general_audio_player.stop()
+	_general_audio_player.stream = meele_sound
+	_general_audio_player.play()
 	_attack_anchor.visible = true
 	_attack_anchor.rotation = attack_direction - swipe_angle/2
 	_attack_area.set_collision_mask_value(3, true)
@@ -124,6 +133,7 @@ func stop_attack():
 	attacking = false
 	_attack_area.set_collision_mask_value(3, false)
 	attack_hit_targets = []
+	_general_audio_player.stop()
 
 
 func _on_attack_timer_timeout():
@@ -249,6 +259,9 @@ func roll():
 	can_roll = false
 	_animation.stop()
 	_animation.play(roll_direction_map(roll_direction))
+	_general_audio_player.stop()
+	_general_audio_player.stream = roll_sound
+	_general_audio_player.play()
 	_roll_timer.start(roll_time)
 	_roll_cooldown_timer.start(roll_cooldown)
 	set_collision_mask_value(3, false)
@@ -257,6 +270,7 @@ func roll():
 
 
 func _on_roll_timer_timeout():
+	_general_audio_player.stop()
 	rolling = false
 	_health.revoke_invincibility()
 	update_animationState()

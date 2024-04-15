@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var attack_timer = $AttackTimer
 @onready var target_area = $TargetArea
+@onready var audio_player = $AudioStreamPlayer2D
 
 var active = false
 var attack_in_progress = false
@@ -57,6 +58,7 @@ func _on_pathfinding_timer_timeout():
 func _on_attack_timer_timeout():
 	if animation_state != AnimationState.DYING:
 		attack_in_progress = false
+		audio_player.play()
 		target_area.rotation_degrees = 0
 		for body in target_area.get_overlapping_bodies():
 			if body.has_node("Health"):

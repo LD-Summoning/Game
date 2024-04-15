@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cehy02ptwnhm7"]
+[gd_scene load_steps=10 format=3 uid="uid://cehy02ptwnhm7"]
 
 [ext_resource type="Shader" path="res://shader/fire.gdshader" id="1_kcq53"]
 [ext_resource type="Script" path="res://enemy/burning_area/BurningArea.gd" id="1_vbenh"]
+[ext_resource type="AudioStream" uid="uid://dmhboa055th83" path="res://common/fire.ogg" id="3_h24lc"]
 
 [sub_resource type="Gradient" id="Gradient_c5w61"]
 offsets = PackedFloat32Array(0, 0.0900901, 0.0901639, 0.139344, 0.221311, 0.467213, 1)
@@ -47,6 +48,10 @@ collision_layer = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(26, 26)
 shape = SubResource("CircleShape2D_wwrh7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_h24lc")
+autoplay = true
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

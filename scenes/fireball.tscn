@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://3iql62g3vw3m"]
+[gd_scene load_steps=14 format=3 uid="uid://3iql62g3vw3m"]
 
 [ext_resource type="Texture2D" uid="uid://cab546vm3aqjx" path="res://enemy/fireball/fireball.png" id="1_3qka6"]
 [ext_resource type="Script" path="res://common/projectile.gd" id="1_y3sge"]
+[ext_resource type="AudioStream" uid="uid://bef86hq3atbg2" path="res://enemy/fireball/Fireball(1).ogg" id="2_x3bk4"]
 [ext_resource type="Texture2D" uid="uid://cufvplb2lp0ye" path="res://common/neutral_light.webp" id="3_0h85g"]
-[ext_resource type="AudioStream" uid="uid://dahijj3pgeadp" path="res://enemy/fireball/fire.wav" id="4_leoun"]
+[ext_resource type="AudioStream" uid="uid://d3eqmf0ftwikm" path="res://common/Projektil_fertig.ogg" id="5_xt6bu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhq8y"]
 size = Vector2(7, 8)
@@ -62,6 +63,7 @@ animations = [{
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_y3sge")
+impact_audio_stream = ExtResource("2_x3bk4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
@@ -79,6 +81,6 @@ sprite_frames = SubResource("SpriteFrames_45lmq")
 autoplay = "default"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_leoun")
+stream = ExtResource("5_xt6bu")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

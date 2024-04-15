@@ -1,33 +1,34 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctyaclgm7rht2"]
+[gd_scene load_steps=13 format=3 uid="uid://ctyaclgm7rht2"]
 
-[ext_resource type="Texture2D" uid="uid://ct02vjrkntwcx" path="res://player/Tentakel_summon-Sheet.png" id="1_c4oar"]
-[ext_resource type="Script" path="res://player/tentacle_slap.gd" id="1_e5yl5"]
-[ext_resource type="Texture2D" uid="uid://bs3t2ebdg2q4l" path="res://common/Circle_middle.png" id="2_xq8nw"]
+[ext_resource type="Script" path="res://player/tentacle_slap.gd" id="1_dgv0x"]
+[ext_resource type="Texture2D" uid="uid://bs3t2ebdg2q4l" path="res://common/Circle_middle.png" id="2_e840b"]
+[ext_resource type="Texture2D" uid="uid://ct02vjrkntwcx" path="res://player/Tentakel_summon-Sheet.png" id="3_ek3hq"]
+[ext_resource type="AudioStream" uid="uid://c7qyyl3j6vtw1" path="res://player/Tentacle_summon_fertig.ogg" id="4_smq48"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2hq47"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1m2d"]
-atlas = ExtResource("1_c4oar")
+atlas = ExtResource("3_ek3hq")
 region = Rect2(0, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tyr7d"]
-atlas = ExtResource("1_c4oar")
+atlas = ExtResource("3_ek3hq")
 region = Rect2(16, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_exaw7"]
-atlas = ExtResource("1_c4oar")
+atlas = ExtResource("3_ek3hq")
 region = Rect2(32, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnogi"]
-atlas = ExtResource("1_c4oar")
+atlas = ExtResource("3_ek3hq")
 region = Rect2(48, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t63f2"]
-atlas = ExtResource("1_c4oar")
+atlas = ExtResource("3_ek3hq")
 region = Rect2(64, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjxmi"]
-atlas = ExtResource("1_c4oar")
+atlas = ExtResource("3_ek3hq")
 region = Rect2(80, 0, 16, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hvlmg"]
@@ -60,7 +61,7 @@ animations = [{
 position = Vector2(-1, 0)
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("1_e5yl5")
+script = ExtResource("1_dgv0x")
 
 [node name="CollisionArea" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
@@ -69,7 +70,7 @@ shape = SubResource("CircleShape2D_2hq47")
 
 [node name="TentacleSlapCircle" type="Sprite2D" parent="."]
 position = Vector2(1, 0)
-texture = ExtResource("2_xq8nw")
+texture = ExtResource("2_e840b")
 hframes = 2
 frame = 1
 
@@ -81,6 +82,10 @@ frame_progress = 1.0
 
 [node name="SlapTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_smq48")
+volume_db = 5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="SlapTimer" to="." method="_on_slap_timer_timeout"]
