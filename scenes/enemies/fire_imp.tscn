@@ -14,9 +14,7 @@ shader_parameter/flash_red = false
 
 [node name="Imp" parent="." node_paths=PackedStringArray("sprite2d") instance=ExtResource("1_i26so")]
 projectile_scene = ExtResource("2_obdgr")
-projectile_speed = 200
 sprite2d = NodePath("Sprite2D")
-max_health = 25
 
 [node name="Sprite2D" type="Sprite2D" parent="Imp"]
 material = SubResource("ShaderMaterial_sfoln")

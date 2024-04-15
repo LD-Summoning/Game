@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwtrouaxutv35"]
+[gd_scene load_steps=6 format=3 uid="uid://bwtrouaxutv35"]
 
 [ext_resource type="Script" path="res://common/title_screen.gd" id="1_ak6jq"]
+[ext_resource type="AudioStream" uid="uid://bgsg5aacg0sq3" path="res://levels/music/MainMenu.ogg" id="2_qeeg3"]
+[ext_resource type="Script" path="res://common/LoopPlayer.gd" id="3_mvory"]
 
 [sub_resource type="Theme" id="Theme_mp451"]
 default_font_size = 60
@@ -60,5 +62,10 @@ offset_right = 400.0
 offset_bottom = 200.0
 theme = SubResource("Theme_rndi4")
 text = "Play"
+
+[node name="LoopPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qeeg3")
+autoplay = true
+script = ExtResource("3_mvory")
 
 [connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

@@ -10,5 +10,6 @@ func _ready():
 	leadup_audio_player.stop()
 	var playback_audio_player = get_parent().get_parent().get_node("PlaybackPlayer")
 	playback_audio_player.stop()
+	loop_music.loop = true
 	playback_audio_player.stream = loop_music
 	leadup_audio_player.play()
