@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccwha4kaldu32"]
+[gd_scene load_steps=7 format=3 uid="uid://ccwha4kaldu32"]
 
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_0c2id"]
 [ext_resource type="TileSet" uid="uid://cfga83ddv1htv" path="res://background/tileset.tres" id="2_2n1de"]
 [ext_resource type="Script" path="res://player/PlayerStartPos.gd" id="3_2kmki"]
 [ext_resource type="PackedScene" uid="uid://de36frn825wqg" path="res://scenes/enemies/boss.tscn" id="4_r6jnt"]
+[ext_resource type="Script" path="res://levels/MusicChange.gd" id="5_a2e78"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wn2wp"]
 vertices = PackedVector2Array(121, 7, 153, 7, 153, 23, 169, 23, 169, 39, 185, 39, 185, 55, 201, 55, 201, 87, 217, 87, 217, 137, 201, 137, 201, 169, 185, 169, 23, 39, 185, 185, 169, 185, 169, 201, 153, 201, 153, 217, 121, 217, 121, 233, 105, 233, 105, 409, 87, 409, 87, 233, 71, 233, 71, 217, 39, 217, 39, 201, 23, 201, 23, 185, 7, 185, 7, 169, -9, 169, -9, 137, -25, 137, -25, 87, -9, 87, -9, 55, 7, 55, 7, 39, 23, 23, 39, 23, 39, 7, 71, 7, 71, -9, 121, -9)
@@ -37,3 +38,6 @@ position = Vector2(101, 105)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("5_a2e78")

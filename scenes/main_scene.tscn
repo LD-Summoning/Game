@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnd05lhjqhlc2"]
+[gd_scene load_steps=8 format=3 uid="uid://bnd05lhjqhlc2"]
 
 [ext_resource type="PackedScene" uid="uid://bjo585dmglbid" path="res://levels/level_Start.tscn" id="1_m0ma4"]
 [ext_resource type="PackedScene" uid="uid://bqnmlnjkhs2tk" path="res://scenes/player.tscn" id="2_vo3os"]
 [ext_resource type="Script" path="res://levels/LevelSwitcher.gd" id="3_edjhe"]
 [ext_resource type="Shader" path="res://shader/waterbottle.gdshader" id="4_h05d6"]
 [ext_resource type="Texture2D" uid="uid://dil3h2pr7j174" path="res://player/bo'lle o' wa'er.png" id="4_pthhu"]
+[ext_resource type="Script" path="res://levels/LeadupPlayer.gd" id="6_k2ck6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0e4ix"]
 shader = ExtResource("4_h05d6")
@@ -53,5 +54,9 @@ texture = ExtResource("4_pthhu")
 
 [node name="PlayerCasts" type="Node2D" parent="."]
 
+[node name="LeadupPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("6_k2ck6")
+
 [connection signal="scene_change" from="Level" to="LevelSwitcher" method="_on_level_scene_change"]
 [connection signal="timeout" from="LevelSwitcher/LevelSwitchCooldown" to="LevelSwitcher" method="_on_level_switch_cooldown_timeout"]
+[connection signal="finished" from="LeadupPlayer" to="LeadupPlayer" method="_on_finished"]
