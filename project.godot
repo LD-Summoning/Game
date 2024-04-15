@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Octopus"
 config/version="FINAL FINAL v2 really FINAL !!!"
-run/main_scene="res://scenes/main_scene.tscn"
+run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://Icon.png"
 

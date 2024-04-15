@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwtrouaxutv35"]
+
+[ext_resource type="Script" path="res://common/title_screen.gd" id="1_ak6jq"]
+
+[sub_resource type="Theme" id="Theme_mp451"]
+default_font_size = 60
+
+[sub_resource type="Theme" id="Theme_rndi4"]
+default_font_size = 50
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ak6jq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.180392, 0.360784, 0.74902, 1)
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 2
+offset_right = 400.0
+offset_bottom = 100.0
+theme = SubResource("Theme_mp451")
+bbcode_enabled = true
+text = "[center][b]Game name[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="Button" type="Button" parent="Control"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 0
+offset_top = 100.0
+offset_right = 400.0
+offset_bottom = 200.0
+theme = SubResource("Theme_rndi4")
+text = "Play"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
