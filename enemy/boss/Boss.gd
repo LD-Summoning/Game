@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var agent = $NavigationAgent2D
 @onready var shader = animated_sprite2d.material
 @onready var summoning_circle_scene = preload("res://scenes/SummoningCircle.tscn")
+@onready var credits_scene = preload("res://scenes/credits.tscn")
 
 var can_summon = true
 var active = false
@@ -128,7 +129,7 @@ func animate_with_animations():
 
 
 func _on_death_timer_timeout():
-	queue_free()
+	get_tree().change_scene_to_packed(credits_scene)
 
 
 func _on_death():

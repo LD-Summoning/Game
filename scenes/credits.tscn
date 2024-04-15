@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://4cvvljys3f6f"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.180392, 0.360784, 0.74902, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.0
+offset_top = -120.0
+offset_right = 213.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+text = "
+
+
+
+Credits 
+
+Project Manager – Arved Ehrnsperger 
+
+Project Manager Manager – David Neumann 
+
+Gods in programming – Arved Ehrnsperger and David Neumann 
+
+Have all the knowledge – Arved Ehrnsperger and David Neumann 
+
+User interface – Arved Ehrnsperger 
+
+Ideas – Arved Ehrnsperger, David Neumann, Tom Schönecker and Emily Hähnel 
+
+Character design – Tom Schönecker 
+
+Level design – Tom Schönecker 
+
+Creation of basically everything in levels– Tom Schönecker, David Neumann, Arved Ehrnsperger 
+
+Founder of cute hentai monster – Tom Schönecker 
+
+Music – Emily Hähnel 
+
+Music improvement – Lea Tröger  
+
+Names of music – Tom Schönecker (and Google Translator) 
+
+Script – Emily Hähnel 
+
+Making of sounds – Emily Hähnel (except the fire sound because she had no chips bag, David did that one) 
+
+Inserting sounds – David Neumann 
+
+Provided apartment, food and snacks – David Neumann, Tom Schönecker 
+
+Shitty ideas which have not been implemented – David Neumann, Emily Hähnel (RIP ice cream boss) 
+
+Nearly lost his mind – Arved Ehrnsperger (actually all of us but him the most) 
+
+Credits – Emily Hähnel 
+
+Has nothing more to do because she´s basically useless and just emotional support – Emily Hähnel 
+
+I don´t even know, what exactly everyone did, but I love them all (and our cute little octopus) 
+
+ 
+
+Music 
+
+Main Theme – Memento Octopodam 
+
+Cult Theme – In Octopoda veritam 
+
+Level music – Octopoda omnia vincit 
+
+Cult Boss Theme – Per Octopodam at astra 
+
+Credits – Tebtaculum sanum in octopoda sana "
+
+[node name="Timer" type="Timer" parent="Control"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Control/Timer" to="Control/RichTextLabel" method="_on_timer_timeout"]
