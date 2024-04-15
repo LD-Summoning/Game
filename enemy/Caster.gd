@@ -134,7 +134,7 @@ func animate_with_animations():
 
 
 func _on_death_timer_timeout():
-	queue_free()
+	get_parent().queue_free()
 
 
 func _on_death():
