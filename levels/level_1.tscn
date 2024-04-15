@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_sgbk6"]
 [ext_resource type="Script" path="res://levels/Door.gd" id="3_ervgu"]
 [ext_resource type="Script" path="res://player/PlayerStartPos.gd" id="3_j0txl"]
-[ext_resource type="PackedScene" uid="uid://emqhnfuc4web" path="res://levels/Level_5.tscn" id="5_0mpwl"]
+[ext_resource type="PackedScene" uid="uid://bptry23y6asr4" path="res://levels/Level_6.tscn" id="5_2dpvq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wn2wp"]
 vertices = PackedVector2Array(121, 7, 153, 7, 153, 23, 169, 23, 169, 39, 185, 39, 185, 55, 201, 55, 201, 87, 217, 87, 217, 137, 201, 137, 201, 169, 185, 169, 23, 39, 185, 185, 169, 185, 169, 201, 153, 201, 153, 217, 121, 217, 121, 233, 105, 233, 105, 409, 87, 409, 87, 233, 71, 233, 71, 217, 39, 217, 39, 201, 23, 201, 23, 185, 7, 185, 7, 169, -9, 169, -9, 137, -25, 137, -25, 87, -9, 87, -9, 55, 7, 55, 7, 39, 23, 23, 39, 23, 39, 7, 71, 7, 71, -9, 121, -9)
@@ -43,7 +43,7 @@ navigation_polygon = SubResource("NavigationPolygon_wn2wp")
 collision_layer = 0
 collision_mask = 17
 script = ExtResource("3_ervgu")
-scene = ExtResource("5_0mpwl")
+scene = ExtResource("5_2dpvq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2(96, 280.5)
