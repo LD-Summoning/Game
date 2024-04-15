@@ -12,4 +12,5 @@ func _ready():
 
 
 func callback(_ignored, door):
-	scene_change.emit(door.scene)
+	if $Enemies.get_child_count() == 1:
+		scene_change.emit(door.scene)
