@@ -1,7 +1,7 @@
 [gd_scene load_steps=43 format=3 uid="uid://dyrs86vgkel80"]
 
 [ext_resource type="PackedScene" uid="uid://bahiwly305vcs" path="res://scenes/caster.tscn" id="1_6vymr"]
-[ext_resource type="PackedScene" uid="uid://3iql62g3vw3m" path="res://scenes/fireball.tscn" id="2_bm2mn"]
+[ext_resource type="PackedScene" path="res://scenes/snowball.tscn" id="2_371vd"]
 [ext_resource type="Texture2D" uid="uid://dxykbwbv5oisg" path="res://enemy/cultist/Cultist_blau_Animation.png" id="3_3oaf3"]
 [ext_resource type="Shader" path="res://shader/damage_effect.gdshader" id="3_ffxfl"]
 
@@ -298,7 +298,7 @@ animations = [{
 [node name="BlueCultist" type="Node2D"]
 
 [node name="Caster" parent="." node_paths=PackedStringArray("animated_sprite2d") instance=ExtResource("1_6vymr")]
-projectile_scene = ExtResource("2_bm2mn")
+projectile_scene = ExtResource("2_371vd")
 animated_sprite2d = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Caster"]
