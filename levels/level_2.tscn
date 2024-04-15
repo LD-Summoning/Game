@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b0gwjrkr0mtl4" path="res://scenes/enemies/fire_imp.tscn" id="5_gj073"]
 [ext_resource type="PackedScene" uid="uid://cr54n4tv8h007" path="res://scenes/enemies/ice_imp.tscn" id="6_5eol4"]
 [ext_resource type="Script" path="res://levels/Door.gd" id="7_k7cc2"]
-[ext_resource type="PackedScene" uid="uid://emqhnfuc4web" path="res://levels/Level_3.tscn" id="8_1c2bo"]
+[ext_resource type="PackedScene" uid="uid://emqhnfuc4web" path="res://levels/Level_3.tscn" id="8_xmi8m"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wn2wp"]
 vertices = PackedVector2Array(105, 393, 87, 393, 87, 295, 105, 295, 167, -361, 217, -425, 217, -345, 167, -295, 167, -407, 201, -425, 105, -473, 121, -473, 121, -441, 55, -391, 55, -423, 71, -441, 201, -441, 137, -407, 137, -391, 249, -345, 249, -329, 265, -329, 265, -311, 249, -311, 249, -295, 217, -295, 217, -263, 183, -263, 183, -279, 167, -279, 71, -249, 121, -265, 137, -265, 137, -249, 105, -199, 87, -199, 39, -233, 153, -249, 153, -233, 217, -233, 217, -231, 185, -231, 185, -215, 153, -215, 153, -199, 105, -25, 121, -25, 121, -23, 105, -23, 159, 89, 151, 23, 151, -9, 167, -9, 201, 7, 167, 97, 167, -25, 201, -25, 233, 7, 233, 201, 201, 201, 201, 217, 199, 217, 199, 209, 191, 209, 191, 201, 183, 201, 183, 121, 167, 121, 159, 97, 151, 89, 151, 73, 105, 23, 121, 73, 71, 201, 55, 183, 121, 119, 137, 119, 137, 183, 105, 217, 87, 217, 153, 183, 153, 217, 105, 265, 87, 265, 71, 217, 39, 201, 39, 183, 55, 103, 71, 103, 25, 73, 25, 137, 9, 137, -41, 7, -9, 7, 9, 217, -9, 217, -9, 201, -41, 201, -9, -25, 41, -25, 41, 23, 71, 73, 87, 23, -9, -199, -9, -215, -25, -215, -25, -233, 39, -249, 41, -295, 41, -279, 9, -279, -25, -295, -25, -345, -9, -377, 25, -361, 9, -263, -25, -263, -57, -295, -57, -311, -73, -311, -73, -329, -57, -329, -57, -345, -25, -377, 71, -473, 87, -473, 87, -601, 105, -601, 121, -295, -9, -441, 25, -423, 71, -295)
@@ -68,10 +68,21 @@ distance = 200
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")
 
 [node name="Area2D" type="Area2D" parent="." groups=["doors"]]
-collision_layer = 18
+collision_layer = 0
+collision_mask = 17
 script = ExtResource("7_k7cc2")
-scene = ExtResource("8_1c2bo")
+scene = ExtResource("8_xmi8m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(96, -503.5)
+shape = SubResource("RectangleShape2D_72a04")
+
+[node name="Area2D2" type="Area2D" parent="." groups=["doors"]]
+collision_layer = 0
+collision_mask = 17
+script = ExtResource("7_k7cc2")
+scene = ExtResource("8_xmi8m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(96, -503.5)
 shape = SubResource("RectangleShape2D_72a04")
