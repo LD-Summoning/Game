@@ -420,3 +420,9 @@ func _input(event):
 func _on_health_health_changed(from, to):
 	var health_f: float = to/max_health
 	water_bottle.material.set_shader_parameter("health", health_f)
+
+
+func _on_health_death():
+	var level_switcher = get_parent().get_node("LevelSwitcher")
+	level_switcher.new_level_scene = level_switcher.current_level_scene
+	level_switcher.can_switch = true

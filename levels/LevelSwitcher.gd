@@ -2,6 +2,7 @@ extends Node
 
 var level: Node
 var new_level_scene: PackedScene
+var current_level_scene: PackedScene = preload("res://levels/level_Start.tscn")
 @onready var timer = $LevelSwitchCooldown
 @onready var player_casts = get_parent().get_node("PlayerCasts")
 var can_switch = true
@@ -20,6 +21,7 @@ func _process(_delta):
 		level.queue_free()
 		level = new_level
 		timer.start()
+		current_level_scene = new_level_scene
 		new_level_scene = null
 		
 		for cast in player_casts.get_children():

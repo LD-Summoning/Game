@@ -679,6 +679,7 @@ frame = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
+[connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="timeout" from="FishShotDelayTimer" to="." method="_on_fish_shot_delay_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
