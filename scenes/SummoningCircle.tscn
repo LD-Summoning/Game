@@ -1,14 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx238sp6bud4u"]
+[gd_scene load_steps=7 format=3 uid="uid://bx238sp6bud4u"]
 
 [ext_resource type="Script" path="res://common/SummoningCircle.gd" id="1_3hd8q"]
 [ext_resource type="Texture2D" uid="uid://bs3t2ebdg2q4l" path="res://common/Circle_middle.png" id="2_tm804"]
+[ext_resource type="Shader" path="res://shader/appear.gdshader" id="3_yuo82"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ka33r"]
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sd8u5"]
+noise = SubResource("FastNoiseLite_ka33r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c1jex"]
+shader = ExtResource("3_yuo82")
+shader_parameter/threshhold = 0.0
+shader_parameter/NOISE = SubResource("NoiseTexture2D_sd8u5")
 
 [node name="SummoningCircle" type="Node2D"]
 script = ExtResource("1_3hd8q")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CircleSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_tm804")
 hframes = 2
+
+[node name="Thumbnail" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_c1jex")
 
 [node name="SummonTimer" type="Timer" parent="."]
 one_shot = true

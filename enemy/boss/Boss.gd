@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 50
 @export var animated_sprite2d: AnimatedSprite2D
 @export var summonables: Array[PackedScene]
+@export var thumbnails: Array[Texture2D]
 
 @onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var cast_timer = $CastTimer
@@ -44,10 +45,13 @@ func _physics_process(_delta):
 
 
 func summon_random_enemy():
-	var enemy = summonables[randi() % summonables.size()]
+	var index = randi() % summonables.size()
+	var enemy = summonables[index]
+	var thumbnail = thumbnails[index]
 	var summoning_circle = summoning_circle_scene.instantiate()
 	summoning_circle.to_summon = enemy
-	summoning_circle.position = global_position
+	summoning_circle.position = player.global_position
+	summoning_circle.thumbnail = thumbnail
 	summonables_parent.add_child(summoning_circle)
 
 

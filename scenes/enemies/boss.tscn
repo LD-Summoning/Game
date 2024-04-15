@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://de36frn825wqg"]
+[gd_scene load_steps=19 format=3 uid="uid://de36frn825wqg"]
 
 [ext_resource type="Script" path="res://enemy/boss/Boss.gd" id="1_wlxj1"]
 [ext_resource type="Script" path="res://common/Health.gd" id="2_iu1kx"]
@@ -6,7 +6,27 @@
 [ext_resource type="PackedScene" uid="uid://b0gwjrkr0mtl4" path="res://scenes/enemies/fire_imp.tscn" id="3_83lta"]
 [ext_resource type="PackedScene" uid="uid://cr54n4tv8h007" path="res://scenes/enemies/ice_imp.tscn" id="4_qb36h"]
 [ext_resource type="PackedScene" uid="uid://hpc1asacwnb1" path="res://scenes/enemies/yeti.tscn" id="5_x6uc6"]
+[ext_resource type="Texture2D" uid="uid://csgtksdac2pdm" path="res://enemy/fire_demon/demon.png" id="6_hvkts"]
 [ext_resource type="Shader" path="res://shader/damage_effect.gdshader" id="6_u4bfa"]
+[ext_resource type="Texture2D" uid="uid://c7ek30hlrsda7" path="res://enemy/fire_imp/fire_imp.png" id="7_fi04u"]
+[ext_resource type="Texture2D" uid="uid://be64yd08d7fpf" path="res://enemy/ice_imp/ice_imp.png" id="8_86cpp"]
+[ext_resource type="Texture2D" uid="uid://bryfn1onysuty" path="res://enemy/yeti/yeti_atlas.png" id="9_amjyp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1w3x"]
+atlas = ExtResource("6_hvkts")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugqf0"]
+atlas = ExtResource("7_fi04u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_diu31"]
+atlas = ExtResource("8_86cpp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eofv"]
+atlas = ExtResource("9_amjyp")
+region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u2qb2"]
 radius = 9.5
@@ -26,6 +46,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_wlxj1")
 animated_sprite2d = NodePath("AnimatedSprite2D")
 summonables = Array[PackedScene]([ExtResource("2_qajw5"), ExtResource("3_83lta"), ExtResource("4_qb36h"), ExtResource("5_x6uc6")])
+thumbnails = Array[Texture2D]([SubResource("AtlasTexture_k1w3x"), SubResource("AtlasTexture_ugqf0"), SubResource("AtlasTexture_diu31"), SubResource("AtlasTexture_3eofv")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 0)
