@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bnd05lhjqhlc2"]
 
-[ext_resource type="PackedScene" uid="uid://bjo585dmglbid" path="res://levels/level_1.tscn" id="1_m0ma4"]
+[ext_resource type="PackedScene" uid="uid://bjo585dmglbid" path="res://levels/level_Start.tscn" id="1_m0ma4"]
 [ext_resource type="PackedScene" uid="uid://bqnmlnjkhs2tk" path="res://scenes/player.tscn" id="2_vo3os"]
 [ext_resource type="Script" path="res://levels/LevelSwitcher.gd" id="3_edjhe"]
 [ext_resource type="Shader" path="res://shader/waterbottle.gdshader" id="4_h05d6"]
