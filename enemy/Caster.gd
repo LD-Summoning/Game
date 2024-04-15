@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var projectile_scene: PackedScene
 @export var sprite2d: Sprite2D
 @export var animated_sprite2d: AnimatedSprite2D
+@export var max_health = 100
 
 @onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var cast_timer = $CastTimer
@@ -29,6 +30,7 @@ func _ready():
 		shader = animated_sprite2d.material
 	else:
 		shader = sprite2d.material
+	$Health._health = max_health
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(_delta):
