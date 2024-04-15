@@ -49,6 +49,7 @@ animations = [{
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_qcsth")
+damage = 5
 impact_audio_stream = ExtResource("2_kcg4h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

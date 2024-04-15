@@ -299,7 +299,9 @@ animations = [{
 
 [node name="Caster" parent="." node_paths=PackedStringArray("animated_sprite2d") instance=ExtResource("1_onu2f")]
 projectile_scene = ExtResource("2_4lcxk")
+projectile_speed = 250
 animated_sprite2d = NodePath("AnimatedSprite2D")
+max_health = 75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Caster"]
 material = SubResource("ShaderMaterial_xnyuu")

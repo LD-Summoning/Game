@@ -52,6 +52,7 @@ autostart = true
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_xwll8")
+_health = 50
 
 [node name="AnimationTimer" type="Timer" parent="."]
 wait_time = 0.125
