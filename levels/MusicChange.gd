@@ -1,9 +1,14 @@
 extends Node
 
-@export var music: AudioStream
+@export var leadup_music: AudioStream
+@export var loop_music: AudioStream
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var audio_player = get_parent().get_node("AudioStreamPlayer")
-	audio_player.stream = music
-	audio_player.play()
+	var leadup_audio_player = get_parent().get_parent().get_node("LeadupPlayer")
+	leadup_audio_player.stream = leadup_music
+	leadup_audio_player.stop()
+	var playback_audio_player = get_parent().get_parent().get_node("PlaybackPlayer")
+	playback_audio_player.stop()
+	playback_audio_player.stream = loop_music
+	leadup_audio_player.play()
