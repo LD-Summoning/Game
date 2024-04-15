@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqddic7li8b0b"]
+[gd_scene load_steps=11 format=3 uid="uid://bqddic7li8b0b"]
 
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_mt154"]
 [ext_resource type="TileSet" uid="uid://cfga83ddv1htv" path="res://background/tileset.tres" id="2_76lc3"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bc7rbmkkhpd31" path="res://levels/spawner.tscn" id="4_86u8e"]
 [ext_resource type="PackedScene" uid="uid://b0gwjrkr0mtl4" path="res://scenes/enemies/fire_imp.tscn" id="5_xq17e"]
 [ext_resource type="PackedScene" uid="uid://cr54n4tv8h007" path="res://scenes/enemies/ice_imp.tscn" id="6_jnymd"]
+[ext_resource type="Script" path="res://levels/Door.gd" id="7_s45rk"]
+[ext_resource type="PackedScene" uid="uid://emqhnfuc4web" path="res://levels/Level_5.tscn" id="8_vf02f"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wn2wp"]
 vertices = PackedVector2Array(105, 393, 87, 393, 87, 295, 105, 295, 167, -361, 217, -425, 217, -345, 167, -295, 167, -407, 201, -425, 105, -473, 121, -473, 121, -441, 55, -391, 55, -423, 71, -441, 201, -441, 137, -407, 137, -391, 249, -345, 249, -329, 265, -329, 265, -311, 249, -311, 249, -295, 217, -295, 217, -263, 183, -263, 183, -279, 167, -279, 71, -249, 121, -265, 137, -265, 137, -249, 105, -199, 87, -199, 39, -233, 153, -249, 153, -233, 217, -233, 217, -231, 185, -231, 185, -215, 153, -215, 153, -199, 105, -25, 121, -25, 121, -23, 105, -23, 159, 89, 151, 23, 151, -9, 167, -9, 201, 7, 167, 97, 167, -25, 201, -25, 233, 7, 233, 201, 201, 201, 201, 217, 199, 217, 199, 209, 191, 209, 191, 201, 183, 201, 183, 121, 167, 121, 159, 97, 151, 89, 151, 73, 105, 23, 121, 73, 71, 201, 55, 183, 121, 119, 137, 119, 137, 183, 105, 217, 87, 217, 153, 183, 153, 217, 105, 265, 87, 265, 71, 217, 39, 201, 39, 183, 55, 103, 71, 103, 25, 73, 25, 137, 9, 137, -41, 7, -9, 7, 9, 217, -9, 217, -9, 201, -41, 201, -9, -25, 41, -25, 41, 23, 71, 73, 87, 23, -9, -199, -9, -215, -25, -215, -25, -233, 39, -249, 41, -295, 41, -279, 9, -279, -25, -295, -25, -345, -9, -377, 25, -361, 9, -263, -25, -263, -57, -295, -57, -311, -73, -311, -73, -329, -57, -329, -57, -345, -25, -377, 71, -473, 87, -473, 87, -601, 105, -601, 121, -295, -9, -441, 25, -423, 71, -295)
@@ -14,6 +16,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-120, -708, 320, -699, 
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 agent_radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72a04"]
+size = Vector2(32, 15)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_mt154")
@@ -60,5 +65,13 @@ scene_to_spawn = ExtResource("6_jnymd")
 distance = 200
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")
+
+[node name="Area2D" type="Area2D" parent="." groups=["doors"]]
+collision_layer = 18
+script = ExtResource("7_s45rk")
+scene = ExtResource("8_vf02f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(96, -503.5)
+shape = SubResource("RectangleShape2D_72a04")
