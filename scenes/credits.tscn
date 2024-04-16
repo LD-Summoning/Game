@@ -100,7 +100,7 @@ Level music – Octopoda omnia vincit
 
 Cult Boss Theme – Per Octopodam at astra 
 
-Credits – Tebtaculum sanum in octopoda sana "
+Credits – Tentaculum sanum in octopoda sana "
 
 [node name="Timer" type="Timer" parent="Control"]
 wait_time = 0.5
