@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnd05lhjqhlc2"]
+[gd_scene load_steps=11 format=3 uid="uid://bnd05lhjqhlc2"]
 
 [ext_resource type="PackedScene" uid="uid://bjo585dmglbid" path="res://levels/level_Start.tscn" id="1_m0ma4"]
 [ext_resource type="PackedScene" uid="uid://bqnmlnjkhs2tk" path="res://scenes/player.tscn" id="2_vo3os"]
 [ext_resource type="Script" path="res://levels/LevelSwitcher.gd" id="3_edjhe"]
 [ext_resource type="Shader" path="res://shader/waterbottle.gdshader" id="4_h05d6"]
 [ext_resource type="Texture2D" uid="uid://dil3h2pr7j174" path="res://player/bo'lle o' wa'er.png" id="4_pthhu"]
+[ext_resource type="PackedScene" uid="uid://c2mftdsbawbms" path="res://scenes/pause_menu.tscn" id="4_sg5t8"]
 [ext_resource type="AudioStream" uid="uid://bkvbmlghbgosf" path="res://levels/music/AdventureTheme_Einleitung.ogg" id="6_ydakj"]
 [ext_resource type="AudioStream" uid="uid://m45v2el08n5q" path="res://levels/music/AdventureTheme_Wiederholung.ogg" id="7_iyfmd"]
 [ext_resource type="Script" path="res://common/PlaybackPlay.gd" id="8_kg3vv"]
@@ -18,6 +19,7 @@ shader_parameter/health = 1.0
 [node name="Level" parent="." instance=ExtResource("1_m0ma4")]
 
 [node name="Player" parent="." node_paths=PackedStringArray("water_bottle") groups=["player"] instance=ExtResource("2_vo3os")]
+visible = false
 water_bottle = NodePath("../UI Layer/Control/WaterBottle")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -31,6 +33,8 @@ script = ExtResource("3_edjhe")
 one_shot = true
 
 [node name="UI Layer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="UI Layer" instance=ExtResource("4_sg5t8")]
 
 [node name="Control" type="Control" parent="UI Layer"]
 layout_mode = 3

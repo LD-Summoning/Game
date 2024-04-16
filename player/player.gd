@@ -39,7 +39,7 @@ enum Direction{
 @export var meele_sound: AudioStream
 @export var roll_sound: AudioStream
 @export var fish_sound: AudioStream
-
+@export var active = false
 
 @onready var _animation = $PlayerSprite
 @onready var _health = $Health
@@ -79,6 +79,8 @@ func get_input():
 	velocity = input_direction * speed
 
 func _physics_process(_delta):
+	if !active:
+		return
 	if rolling:
 		velocity = roll_direction_vector * roll_speed
 	else: 
@@ -91,6 +93,8 @@ func _ready():
 
 
 func _process(delta):
+	if !active:
+		return
 	if fish_channeling:
 		_fish_summon_circle_anchor.rotation = Vector2.RIGHT.angle_to(get_local_mouse_position())
 	elif is_preparing_slap:
@@ -330,6 +334,8 @@ func update_animationState():
 
 
 func _input(event):
+	if !active:
+		return
 	if rolling:
 		return
 	elif event.is_action_pressed("roll") and can_roll and state != AnimationStates.IDLE:
