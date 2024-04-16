@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnd05lhjqhlc2"]
+[gd_scene load_steps=13 format=3 uid="uid://bnd05lhjqhlc2"]
 
 [ext_resource type="PackedScene" uid="uid://bjo585dmglbid" path="res://levels/level_Start.tscn" id="1_m0ma4"]
 [ext_resource type="PackedScene" uid="uid://bqnmlnjkhs2tk" path="res://scenes/player.tscn" id="2_vo3os"]
 [ext_resource type="Script" path="res://levels/LevelSwitcher.gd" id="3_edjhe"]
 [ext_resource type="Shader" path="res://shader/waterbottle.gdshader" id="4_h05d6"]
 [ext_resource type="Texture2D" uid="uid://dil3h2pr7j174" path="res://player/bo'lle o' wa'er.png" id="4_pthhu"]
-[ext_resource type="PackedScene" uid="uid://c2mftdsbawbms" path="res://scenes/pause_menu.tscn" id="4_sg5t8"]
+[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="4_sg5t8"]
 [ext_resource type="AudioStream" uid="uid://bkvbmlghbgosf" path="res://levels/music/AdventureTheme_Einleitung.ogg" id="6_ydakj"]
 [ext_resource type="AudioStream" uid="uid://m45v2el08n5q" path="res://levels/music/AdventureTheme_Wiederholung.ogg" id="7_iyfmd"]
+[ext_resource type="Script" path="res://common/LeadupPlayer.gd" id="8_bhdf6"]
 [ext_resource type="Script" path="res://common/PlaybackPlay.gd" id="8_kg3vv"]
+[ext_resource type="AudioStream" uid="uid://d25udtmalcnl" path="res://levels/music/Beschworung_Anfang_unangepasst.ogg" id="11_qysfh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0e4ix"]
 shader = ExtResource("4_h05d6")
@@ -62,13 +64,18 @@ texture = ExtResource("4_pthhu")
 
 [node name="LeadupPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ydakj")
-autoplay = true
+script = ExtResource("8_bhdf6")
 
 [node name="PlaybackPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_iyfmd")
 script = ExtResource("8_kg3vv")
 
+[node name="CutscenePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_qysfh")
+autoplay = true
+
 [connection signal="scene_change" from="Level" to="LevelSwitcher" method="_on_level_scene_change"]
 [connection signal="timeout" from="LevelSwitcher/LevelSwitchCooldown" to="LevelSwitcher" method="_on_level_switch_cooldown_timeout"]
 [connection signal="finished" from="LeadupPlayer" to="PlaybackPlayer" method="_on_leadup_player_finished"]
 [connection signal="finished" from="PlaybackPlayer" to="PlaybackPlayer" method="_on_finished"]
+[connection signal="finished" from="CutscenePlayer" to="LeadupPlayer" method="_on_cutscene_player_finished"]
