@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://4cvvljys3f6f"]
+[gd_scene load_steps=3 format=3 uid="uid://4cvvljys3f6f"]
+
+[ext_resource type="AudioStream" uid="uid://b5hlkljfxo3dj" path="res://levels/music/Credits.ogg" id="1_70ygo"]
+[ext_resource type="Script" path="res://common/LoopPlayer.gd" id="2_6e78t"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -102,5 +105,10 @@ Credits – Tebtaculum sanum in octopoda sana "
 [node name="Timer" type="Timer" parent="Control"]
 wait_time = 0.5
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_70ygo")
+autoplay = true
+script = ExtResource("2_6e78t")
 
 [connection signal="timeout" from="Control/Timer" to="Control/RichTextLabel" method="_on_timer_timeout"]
