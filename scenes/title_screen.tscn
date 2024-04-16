@@ -37,9 +37,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -66.5
-offset_top = -20.0
+offset_top = -110.0
 offset_right = 66.5
-offset_bottom = 20.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.333, 0.333)
@@ -62,6 +62,34 @@ offset_right = 400.0
 offset_bottom = 200.0
 theme = SubResource("Theme_rndi4")
 text = "Play"
+
+[node name="howtoplay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.0
+offset_right = 100.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="howtoplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Move with WASD
+Roll with Shift
+Melee with LMB
+Shoot with RMB
+Summon with E
+Continue Cutscene with SPACE"
 
 [node name="LoopPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_qeeg3")
