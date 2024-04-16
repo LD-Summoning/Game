@@ -32,9 +32,9 @@ enum Direction{
 @export var attack_update_time = 0.025
 @export var swipe_angle = deg_to_rad(135)
 @export var melee_damage = 10
-@export var fish_spawn_delay = 0.1
+@export var fish_spawn_delay = 0.14
 @export var tentacle_slap_cooldown = 5
-@export var tentacle_slap_damage = 30
+@export var tentacle_slap_damage = 20
 @export var tentacle_slap_duration = 1
 @export var meele_sound: AudioStream
 @export var roll_sound: AudioStream
