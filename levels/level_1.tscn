@@ -43,15 +43,17 @@ script = ExtResource("3_dbjyl")
 [node name="Spawner" parent="Enemies" instance=ExtResource("4_prq1f")]
 position = Vector2(105, 116)
 scene_to_spawn = ExtResource("5_836pv")
-distance = 100
+distance = 200
 
 [node name="Spawner2" parent="Enemies" instance=ExtResource("4_prq1f")]
 position = Vector2(512, -14)
 scene_to_spawn = ExtResource("6_r8il2")
+distance = 225
 
 [node name="Spawner3" parent="Enemies" instance=ExtResource("4_prq1f")]
 position = Vector2(518, -142)
 scene_to_spawn = ExtResource("5_836pv")
+distance = 200
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")

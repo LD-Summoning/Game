@@ -59,14 +59,17 @@ distance = 200
 [node name="Spawner4" parent="Enemies" instance=ExtResource("4_vdoia")]
 position = Vector2(255, -262)
 scene_to_spawn = ExtResource("7_qi07u")
+distance = 200
 
 [node name="Spawner5" parent="Enemies" instance=ExtResource("4_vdoia")]
 position = Vector2(256, -199)
 scene_to_spawn = ExtResource("8_se75q")
+distance = 200
 
 [node name="Spawner6" parent="Enemies" instance=ExtResource("4_vdoia")]
 position = Vector2(256, -324)
 scene_to_spawn = ExtResource("8_se75q")
+distance = 200
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false

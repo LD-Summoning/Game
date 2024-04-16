@@ -44,12 +44,12 @@ script = ExtResource("3_skcys")
 [node name="Spawner" parent="Enemies" instance=ExtResource("4_86u8e")]
 position = Vector2(999, 341)
 scene_to_spawn = ExtResource("5_aryb4")
-distance = 200
+distance = 225
 
 [node name="Spawner2" parent="Enemies" instance=ExtResource("4_86u8e")]
 position = Vector2(911, 256)
 scene_to_spawn = ExtResource("6_aol0p")
-distance = 200
+distance = 225
 
 [node name="Spawner3" parent="Enemies" instance=ExtResource("4_86u8e")]
 position = Vector2(193, 120)

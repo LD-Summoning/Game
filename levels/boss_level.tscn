@@ -28,7 +28,7 @@ layer_1/name = "Doors"
 layer_1/tile_data = PackedInt32Array(1114117, 3, 0, 1114118, 65539, 0)
 
 [node name="PlayerStartPos" type="Node2D" parent="."]
-position = Vector2(103, 120)
+position = Vector2(96, 255)
 script = ExtResource("3_2kmki")
 
 [node name="Enemies" type="Node" parent="."]

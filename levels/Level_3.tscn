@@ -48,7 +48,7 @@ distance = 200
 [node name="Spawner2" parent="Enemies" instance=ExtResource("4_keu2y")]
 position = Vector2(672, 216)
 scene_to_spawn = ExtResource("6_8vlix")
-distance = 200
+distance = 225
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_wn2wp")

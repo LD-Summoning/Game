@@ -515,6 +515,7 @@ autostart = true
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_iu1kx")
+_health = 250
 
 [node name="AnimationTimer" type="Timer" parent="."]
 wait_time = 0.125
