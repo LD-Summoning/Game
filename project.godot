@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Brawlthulu"
-config/version="FINAL FINAL v2 really FINAL !!!"
+config/version="gamejam"
 run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.180392, 0.360784, 0.74902, 1)
 boot_splash/image="res://Icon.png"
 boot_splash/use_filter=false
 config/icon="res://Icon.png"
+config/windows_native_icon="res://Icon.ico"
 
 [display]
 
